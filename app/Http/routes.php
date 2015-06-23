@@ -31,6 +31,7 @@ $router->resource('pages', 'PagesController',
 
 
 /** USERS ROUTES */
-get('admin', array('as' => 'admin.login', 'uses' => 'UsersController@adminLogin'));
+get('adminlogin', 'UsersController@adminLogin');
+get('admin', array('as' => 'admin', 'uses' => 'UsersController@adminHome'));
 $router->resource('users', 'UsersController');
 

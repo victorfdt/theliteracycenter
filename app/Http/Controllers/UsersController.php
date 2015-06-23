@@ -88,6 +88,11 @@ class UsersController extends Controller
         return view('admin.login');
     }
 
+    public function adminHome()
+    {
+        return view('admin.home');
+    }
+
     /*
         Login the admin
     */

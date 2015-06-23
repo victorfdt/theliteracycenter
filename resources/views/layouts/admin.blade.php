@@ -5,50 +5,42 @@
     Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		@include('sections.head')
-	</head>
+<head>
+	@include('sections.head')
+</head>
 
-	<body>
-
+<body>
 	<!-- Header -->
-		<div id="header">
-			<div class="container">
-					
-				<!-- Logo -->
-					@include('sections.logo')
-				
-				<!-- Nav -->
-					@include('sections.menu2')
+	<div id="header">
+		<div class="container">
 
-			</div>
+			<!-- Logo -->
+			@include('sections.logo')
+
+			<!-- Menu -->
+			@include('admin.menu')			
+
 		</div>
+	</div>
 	<!-- Header -->
 	
 
-	<!-- Main -->
-		<div id="page">
-				
-			<!-- Main -->
-			<div id="main" class="container">
-				<div class="row">
-					<div class="9u">
-						@yield('content')
-					</div>
-					
-					<div class="3u">						
-					</div>
 
-				</div>
+		<!-- Main -->
+		<div id="main" class="container">
+			<div class="row">
+				<div class="12u">
+					@yield('content')
+				</div>				
 			</div>
-			<!-- Main -->
-
 		</div>
+		<!-- Main -->
+
 	<!-- /Main -->
 
 	<!-- Featured -->
-		<!-- @include('sections.featured') -->
+	<!-- @include('sections.featured') -->
 	<!-- /Featured -->	
 
-	</body>
+</body>
 </html>

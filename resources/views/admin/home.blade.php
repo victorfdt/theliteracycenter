@@ -2,6 +2,6 @@
 
 @section('content')
 
-	@include('sections.login')
+	<h1>Hello, </h1>
 
 @stop
