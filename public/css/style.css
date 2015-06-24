@@ -792,8 +792,7 @@
 		}
 
 		#logo img
-		{
-			
+		{			
 			height: 80px;
 			padding-top: 15px;
 			padding-left: 100px;
@@ -894,8 +893,8 @@
 
 	#banner img
 	{
-		height: 60%;
-		width: 60%;
+		/*height: 60%;
+		width: 60%; */
 	}
 
 	#myCarousel

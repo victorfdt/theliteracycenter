@@ -32,6 +32,13 @@ $router->resource('pages', 'PagesController',
 
 /** USERS ROUTES */
 get('adminlogin', 'UsersController@adminLogin');
-get('admin', array('as' => 'admin', 'uses' => 'UsersController@adminHome'));
+
 $router->resource('users', 'UsersController');
 
+/** AUTHENTICATION */
+Route::get('/login', 'Auth\AuthController@getLogin');
+Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::get('/password', 'Auth\PasswordController@getEmail');
+
+/** ADMIN */
+get('admin', array('as' => 'admin', 'uses' => 'AdminController@index'));

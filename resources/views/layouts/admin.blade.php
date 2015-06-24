@@ -14,6 +14,8 @@
 	<div id="header">
 		<div class="container">
 
+			<!-- TODO = ONLY SHOW WHEN THE ADMIN IS LOOGED!!!!!--> 
+
 			<!-- Logo -->
 			@include('sections.logo')
 
@@ -37,10 +39,6 @@
 		<!-- Main -->
 
 	<!-- /Main -->
-
-	<!-- Featured -->
-	<!-- @include('sections.featured') -->
-	<!-- /Featured -->	
 
 </body>
 </html>

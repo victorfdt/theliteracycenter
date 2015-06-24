@@ -12,6 +12,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
     use Authenticatable, CanResetPassword;
 
+    
+
     /**
      * The database table used by the model.
      *
@@ -32,4 +34,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+    public function isAdmin()
+    {
+                
+    }
 }
