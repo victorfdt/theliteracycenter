@@ -42,3 +42,4 @@ Route::get('/password', 'Auth\PasswordController@getEmail');
 
 /** ADMIN */
 get('admin', array('as' => 'admin', 'uses' => 'AdminController@index'));
+get('admin/account', array('as' => 'admin', 'uses' => 'AdminController@account'));

@@ -34,13 +34,11 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check()) {
-
-            dd($request->user());
+        if ($this->auth->check()) {            
            if($request->user()->roles_id == 1){
                 return redirect('/admin');
            } else {
-                return redirect('/home');
+                return redirect('/');
             }
         }
 

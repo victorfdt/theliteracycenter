@@ -7,13 +7,22 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+
 class AdminController extends Controller
 {
 
+    private $user;
 
     public function __construct()
     {
+        //See if the there is an authenticated user
+        $this->middleware('auth');
+
+        //Check if this user is a admin
         $this->middleware('admin');
+
+        $this->user = new User;
     }
     /**
      * Display a listing of the resource.
@@ -87,5 +96,25 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function account()
+    {
+        //Return all the results
+        
+
+        $users = $this->user->get()->each(function($user)
+        {
+            if($user->gender == 'm'){
+                $user->gender = 'Male';
+            } else {
+                $user->gender = 'Female';
+            }
+
+                 
+            
+        });
+
+        return view('admin.account', compact('users'));
     }
 }

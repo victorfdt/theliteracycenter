@@ -12,10 +12,16 @@ class InsertDefaultAdmin extends Migration
      */
     public function up()
     {
-        // Insert default roles        
+        // Insert default admin       
         DB::table('users')->insert(
             array(
-                    array('name' => 'admin', 'email' => 'admin@litcenter.org', 'password' => '123', 'gender' => 'm', 'roles_id' => '1')                                           
+                    array('name' => 'admin', 'email' => 'admin@litcenter.org', 'password' => '123', 'gender' => 'm')                                           
+        ));
+
+        // Insert default admin role       
+        DB::table('roles')->insert(
+            array(
+                    array('privilege' => '1', 'user_id' => '1')                                           
         ));
     }
 

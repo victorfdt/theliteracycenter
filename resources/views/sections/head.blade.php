@@ -7,22 +7,29 @@
 <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->	
 
 <!-- Javascript -->	
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="js/skel.min.js"></script>
-<script src="js/skel-panels.min.js"></script>
-<script src="js/init.js"></script>
-<script src="js/menu.js"></script>
-<script src="js/bootstrap.js"></script>	
 
-<!-- CSS -->
-<link rel="stylesheet" href="css/menu.css">   
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bootstrap-theme.css">
+{!! HTML::script('js/jquery-2.1.4.min.js') !!}
+{!! HTML::script('js/skel.min.js') !!}
+{!! HTML::script('js/skel-panels.min.js') !!}
+{!! HTML::script('js/init.js') !!}
+{!! HTML::script('js/menu.js') !!}
+{!! HTML::script('js/bootstrap.js') !!}
 
-<noscript>
-	<link rel="stylesheet" href="css/skel-noscript.css" />
-	<link rel="stylesheet" href="css/style.css" />
-	<link rel="stylesheet" href="css/style-desktop.css" />	
-</noscript>
+
+
+
+
+
+
+
+	{!! HTML::style('css/skel-noscript.css') !!}
+	{!! HTML::style('css/style.css') !!}
+	{!! HTML::style('css/style-desktop.css') !!}	
+
+	<!-- CSS -->
+{!! HTML::style('css/menu.css') !!}
+{!! HTML::style('css/bootstrap.css') !!}
+{!! HTML::style('css/bootstrap-theme.css') !!}
+
 <!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 <!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->

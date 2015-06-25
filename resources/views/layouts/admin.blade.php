@@ -12,7 +12,7 @@
 <body>
 	<!-- Header -->
 	<div id="header">
-		<div class="container">
+		<div>
 
 			<!-- TODO = ONLY SHOW WHEN THE ADMIN IS LOOGED!!!!!--> 
 

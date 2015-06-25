@@ -15,17 +15,11 @@ class CreateRolesTable extends Migration
         //Create the table
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->integer('privilege');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
-        });
-
-        // Insert default roles        
-        DB::table('roles')->insert(
-            array(
-                    array('name' => 'administrator'),
-                    array('name' => 'volunteer'),
-                    array('name' => 'user'),                                
-        ));
+        });       
        
     }
 

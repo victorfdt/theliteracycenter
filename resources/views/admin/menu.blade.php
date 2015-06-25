@@ -1,7 +1,7 @@
 <div id='cssmenu'>
    <ul>
       <li>
-         {!! link_to_route('admin', 'Home', [], array('id' => 'menu_home')) !!}
+         <a href='/admin' id='menu_home'><span>Home</span></a>
       </li>   
 
       <!-- Layout -->   
@@ -33,7 +33,7 @@
       </li> 
 
       <!-- Accounts -->
-      <li><a href='#'><span>Accounts</span></a></li>
+      <li><a href='/admin/account'><span>Accounts</span></a></li>
 
       <!-- Files -->
       <li class='has-sub'><a href='#'><span>Files</span></a>   
@@ -54,9 +54,9 @@
 
       -->
          @else
-         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
+         <li class='has-sub'>
+            <a href="#"> <span>{{ Auth::user()->name }}</span></a>
+            <ul>
                <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
             </ul>
          </li>
