@@ -891,10 +891,9 @@
 		
 	}
 
-	#banner img
+	#banner .container
 	{
-		/*height: 60%;
-		width: 60%; */
+		
 	}
 
 	#myCarousel

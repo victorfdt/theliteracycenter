@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use App\Role;
 
 class RedirectIfAuthenticated
 {
@@ -33,11 +34,12 @@ class RedirectIfAuthenticated
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
+    {   
+
         if ($this->auth->check()) {            
-           if($request->user()->roles_id == 1){
+           if($request->user()->isAdmin() == Role::ADMIN){
                 return redirect('/admin');
-           } else {
+           } else {                
                 return redirect('/');
             }
         }

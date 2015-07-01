@@ -25,7 +25,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password', 'gender'];
+    protected $fillable = ['name', 'surname', 'email', 'password', 'gender'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -51,9 +51,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $condition = false;
 
-        if(Auth::user()->role->privilege == Role::ADMIN){
+        //Checking if the user is administrator
+        if($this->role->privilege == Role::ADMIN){           
            $condition = true;
-        } 
+        }         
 
         return $condition;
     }

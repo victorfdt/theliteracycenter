@@ -1,13 +1,8 @@
-
 <!-- Paypal Button -->
-<div class="row">
-	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-		<input type="hidden" name="cmd" value="_s-xclick">
-		<input type="hidden" name="hosted_button_id" value="QC786R4DBYJVY">	
-		<input type="image" src="images/paypaldonate.png" style="width: 233px; height: 127px;" name="submit" alt="PayPal - The safer, easier way to pay online!">
-
-	</form>
-
+<div class="row">		
+	<a href="https://www.paypal.com/us/cgi-bin/webscr?cmd=_flow&SESSION=J9P2aVzxziHIBEc0ikzJL-T8liOjdc03LyKDPQ0RkrnQ6Jr1KhCkmr1R1Wq&dispatch=5885d80a13c0db1f8e263663d3faee8de6030e9239419d79c3f52f70a3ed57ec">
+		<img src="images/paypaldonate.png" style="width: 233px; height: 127px;">
+	</a>	
 </div>
 
 <!-- Amazon Button -->

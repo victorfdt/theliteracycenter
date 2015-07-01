@@ -31,8 +31,8 @@
 		<!-- Main -->
 		<div id="main" class="container">
 			<div class="row">
-				<div class="12u">
-					@yield('content')
+				<div class="12u">					
+					@yield('content')					
 				</div>				
 			</div>
 		</div>

@@ -1,5 +1,5 @@
 <div id="banner">
-	<div class="container">
-		<img src="images/lit.jpg">
+	<div class="container">	
+		{!! HTML::image('images/lit.jpg', '', array('style' => 'width: 60%;')) !!}
 	</div>
 </div>

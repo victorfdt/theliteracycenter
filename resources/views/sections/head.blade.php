@@ -16,12 +16,6 @@
 {!! HTML::script('js/bootstrap.js') !!}
 
 
-
-
-
-
-
-
 	{!! HTML::style('css/skel-noscript.css') !!}
 	{!! HTML::style('css/style.css') !!}
 	{!! HTML::style('css/style-desktop.css') !!}	

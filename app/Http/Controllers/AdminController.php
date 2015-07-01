@@ -5,9 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\UserRequest; 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Controllers\Controller;
 
+
 use App\User;
+use App\Role;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -22,7 +27,7 @@ class AdminController extends Controller
         //Check if this user is a admin
         $this->middleware('admin');
 
-        $this->user = new User;
+        $this->user = new User();
     }
     /**
      * Display a listing of the resource.
@@ -98,23 +103,121 @@ class AdminController extends Controller
         //
     }
 
+    /**
+     * Show the main account page
+     *
+     * @param 
+     * @return Response
+     */
     public function account()
     {
         //Return all the results
-        
+        $users = $this->user->get();
+        $role = new Role();
 
-        $users = $this->user->get()->each(function($user)
-        {
-            if($user->gender == 'm'){
-                $user->gender = 'Male';
-            } else {
-                $user->gender = 'Female';
-            }
 
-                 
-            
-        });
+        //Passing the Role to use its constants
+        return view('admin.account', compact('users', 'role'));
+    }
 
-        return view('admin.account', compact('users'));
+    /**
+     * Display the create account page
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function accountCreate()
+    {
+        $role = new Role();
+
+        //Passing the Role to use its constants
+        return view('admin.account_create', compact('role'));
+    }
+
+    /**
+     * Create the new account
+     *
+     * @param  
+     * @return 
+     */
+    public function accountStore(UserRequest $request){
+
+        //Creating the new user
+        $newUser = new User();
+        $newUser = $newUser->create($request->all());
+        $newUser->password = bcrypt($newUser->name . 'litcenter');
+        $newUser->save();
+
+        //Getting the user role and creating a new register
+        $role = new Role();
+        $role->user_id = $newUser->id;
+        $role->privilege = $request->input('role');
+        $role->save();          
+
+        //Sending the user to the accounts page
+        return redirect()->route('admin/account');
+    }
+
+    /**
+     * Delete an existing account.
+     *
+     * @param  
+     * @return 
+     */
+    public function accountDestroy($id){
+        $this->user->find($id)->delete();
+
+        //Sending the user to the accounts page
+        return redirect()->route('admin/account');
+    }
+
+    /**
+     * Displays the update account page
+     *
+     * @param  
+     * @return 
+     */
+    public function accountEdit($id){
+
+        //Find the selected user
+        $user = $this->user->find($id);             
+        return view('admin.account_edit', compact('user'));
+    }
+
+    /**
+     * Update the account
+     *
+     * @param  
+     * @return 
+     */
+    public function accountUpdate($id, UserRequest $request){        
+        //Find the selected user
+        $user = $this->user->find($id);
+
+        //Getting the new information and setting
+        $user->fill($request->input())->save();
+
+        //Setting the user 
+        $role = $user->role;        
+        $role->privilege = $request->input('role');
+        $role->save(); 
+
+        //Sending the user to the accounts page
+        return redirect()->route('admin/account');
+
+    }
+
+    public function passwordEdit(){
+        return view('admin.edit_password', compact('user'));        
+    }
+
+    public function passwordUpdate(ChangePasswordRequest $request){
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        //Sending the user to the accounts page
+        return redirect()->route('admin/account');
     }
 }

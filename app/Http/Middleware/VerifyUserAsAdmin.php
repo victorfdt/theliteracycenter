@@ -17,7 +17,9 @@ class VerifyUserAsAdmin
      */
     public function handle($request, Closure $next)
     {
-        
+       # $userId = $request->user()->id;
+        #$user = App\User::find($userId);
+
         if(!$request->user()->isAdmin()){
             return redirect('/');
         }

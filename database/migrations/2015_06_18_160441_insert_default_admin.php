@@ -12,10 +12,10 @@ class InsertDefaultAdmin extends Migration
      */
     public function up()
     {
-        // Insert default admin       
+        // Insert default admin - PASSWORD = 123456       
         DB::table('users')->insert(
             array(
-                    array('name' => 'admin', 'email' => 'admin@litcenter.org', 'password' => '123', 'gender' => 'm')                                           
+                    array('name' => 'Bob', 'surname' => 'Admin', 'email' => 'admin@litcenter.org', 'password' => '$2y$10$mHE2H5npzU6ZysOszFw5WOLh3chXn6N1reC4tVsr7EmTWGIQlg8EG', 'gender' => 'm')                                           
         ));
 
         // Insert default admin role       
@@ -32,6 +32,7 @@ class InsertDefaultAdmin extends Migration
      */
     public function down()
     {
-        DB::table('users')->where('name', 'admin')->delete();
+        DB::table('roles')->where('privilege', '1')->delete();
+        DB::table('users')->where('name', 'Bob')->delete();
     }
 }

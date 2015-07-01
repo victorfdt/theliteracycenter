@@ -33,7 +33,7 @@
       </li> 
 
       <!-- Accounts -->
-      <li><a href='/admin/account'><span>Accounts</span></a></li>
+      <li><a href='/admin/account'><span>Account</span></a></li>
 
       <!-- Files -->
       <li class='has-sub'><a href='#'><span>Files</span></a>   
@@ -58,6 +58,7 @@
             <a href="#"> <span>{{ Auth::user()->name }}</span></a>
             <ul>
                <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+               <li><a href="{{ url('admin/password/edit') }}">Change password</a></li>
             </ul>
          </li>
          @endif
