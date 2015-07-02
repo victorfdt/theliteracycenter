@@ -6,9 +6,30 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest; 
+use App\Http\Requests\ChangePasswordRequest;
+
+use App\User;
+use App\Role;
+use Auth;
+
 
 class UsersController extends Controller
 {
+
+    private $user;
+
+    public function __construct()
+    {
+        //See if the there is an authenticated user
+        $this->middleware('auth');
+
+        //Check if this user is a admin
+        $this->middleware('admin');
+
+        $this->user = new User();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +37,13 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        //Return all the results
+        $users = $this->user->get();
+        $role = new Role();
+
+
+        //Passing the Role to use its constants
+        return view('admin.user.index', compact('users', 'role'));
     }
 
     /**
@@ -26,7 +53,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $role = new Role();
+
+        //Passing the Role to use its constants
+        return view('admin.user.create', compact('role'));
     }
 
     /**
@@ -34,9 +64,22 @@ class UsersController extends Controller
      *
      * @return Response
      */
-    public function store()
+    public function store(UserRequest $request)
     {
-        //
+         //Creating the new user
+        $newUser = new User();
+        $newUser = $newUser->create($request->all());
+        $newUser->password = bcrypt($newUser->name . 'litcenter');
+        $newUser->save();
+
+        //Getting the user role and creating a new register
+        $role = new Role();
+        $role->user_id = $newUser->id;
+        $role->privilege = $request->input('role');
+        $role->save();          
+
+        //Sending the user to the accounts page
+        return redirect()->route('users.index');
     }
 
     /**
@@ -58,7 +101,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        //Find the selected user
+        $user = $this->user->find($id);             
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -67,9 +112,21 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        //Find the selected user
+        $user = $this->user->find($id);
+
+        //Getting the new information and setting
+        $user->fill($request->input())->save();
+
+        //Setting the user 
+        $role = $user->role;        
+        $role->privilege = $request->input('role');
+        $role->save(); 
+
+        //Sending the user to the accounts page
+        return redirect()->route('users.index');
     }
 
     /**
@@ -80,6 +137,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->user->find($id)->delete();
+
+        //Sending the user to the accounts page
+        return redirect()->route('users.index');
+    }
+
+    /** Changes user passord */
+     public function passwordUpdate(ChangePasswordRequest $request){
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        //Sending the user to the accounts page
+        return redirect()->route('users.index');
     }
 }

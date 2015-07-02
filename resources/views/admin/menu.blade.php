@@ -9,7 +9,9 @@
          <ul>
             <li class='has-sub'><a href='#'><span>Index</span></a>
                <ul>
-                  <li><a href='#'><span>Banner</span></a></li>
+                  <li>
+                     {!! link_to_route('banners.index', 'Banner') !!}
+                  </li>
                   <li><a href='#'><span>Content</span></a></li>
                  
                </ul>
@@ -33,7 +35,9 @@
       </li> 
 
       <!-- Accounts -->
-      <li><a href='/admin/account'><span>Account</span></a></li>
+      <li>
+         {!! link_to_route('users.index', 'User') !!}
+      </li>
 
       <!-- Files -->
       <li class='has-sub'><a href='#'><span>Files</span></a>   

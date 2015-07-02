@@ -36,6 +36,6 @@
 
 <!-- BACK BUTTON -->
 <div class="container text-right">
-	{!! link_to_route('admin/account','Back', [] ,array('class' => 'btn btn-success')) !!}
+	{!! link_to_route('admin','Back', [] ,array('class' => 'btn btn-success')) !!}
 </div>
 @endsection

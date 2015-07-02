@@ -7,6 +7,7 @@
 <html>
 <head>
 	@include('sections.head')
+	{!! HTML::script('js/admin.js') !!}
 </head>
 
 <body>
