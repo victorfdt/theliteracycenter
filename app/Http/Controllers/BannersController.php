@@ -48,6 +48,7 @@ class BannersController extends Controller
      */
     public function create()
     {
+        $banner = $this->banner;
         return view('admin.banner.create', compact('banner'));
     }
 
@@ -59,10 +60,10 @@ class BannersController extends Controller
     public function store(BannerRequest $request)
     {
         //Creating the new user
-        $this->banner = $this->banner->create($request->all());
-        $this->banner->active = true;
+        $banner = $this->banner->create($request->all());
+        $banner->active = true;
 
-        $this->banner->save();
+        $banner->save();
 
         //Sending the user to the accounts page
         return redirect()->route('banners.index');
@@ -138,5 +139,5 @@ class BannersController extends Controller
 
         //Sending the user to the accounts page
         return redirect()->route('banners.index');
-    }
+    }    
 }

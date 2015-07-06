@@ -55,10 +55,10 @@
          The input Input::old load the selected value on the update page
      -->
     @if (isset($user))
-      {!! Form::select('role', array('1' => 'Administrator', '2' => 'Volunteer', '3' => 'User'), Input::old('role', $user->role->privilege), ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
+      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer', $role::USER => 'User'), Input::old('role', $user->role->privilege), ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
     
     @else
-      {!! Form::select('role', array('1' => 'Administrator', '2' => 'Volunteer', '3' => 'User'), '', ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
+      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer', $role::USER => 'User'), '', ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
     
     @endif
     {!! $errors->first('role', '<span class="help-block">:message</span>') !!}   

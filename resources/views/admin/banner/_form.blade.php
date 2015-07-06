@@ -16,10 +16,10 @@
          The input Input::old load the selected value on the update page
      -->
     @if (isset($banner))
-      {!! Form::select('type', array('$banner::MAIN' => 'Main Page', '$banner::GENERAL' => 'General'), Input::old('type', $banner->type), ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}
+      {!! Form::select('type', array($banner::MAIN => 'Main Page', $banner::GENERAL => 'General'), Input::old('type', $banner->type), ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}
     
     @else
-      {!! Form::select('type', array('$banner::MAIN' => 'Main Page', '$banner::GENERAL' => 'General'), '', ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}
+      {!! Form::select('type', array($banner::MAIN => 'Main Page', $banner::GENERAL => 'General'), '', ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}
     
     @endif
     {!! $errors->first('type', '<span class="help-block">:message</span>') !!}   

@@ -9,8 +9,6 @@ $(document).ready(function(){
 			//Changing the information on modal
 			$("#modalHeader").text("Select an " + element);
 			$("#modalContent").text("You have to select an " + element);
-			$("#confirmDeleteButton").hide();
-			$("#confirmUpdateButton").hide();
 
 			//Show the modal div
 			$("#myModal").modal();
@@ -33,9 +31,7 @@ $(document).ready(function(){
 
 			//Setting the delete button with the selected user id		
 			var confirmButtonLink = deletePath + '/' + $('table input[type=radio]:checked').val();
-			$("#confirmDeleteButton").attr('href', confirmButtonLink);		
-			$("#confirmDeleteButton").show();
-			$("#confirmUpdateButton").hide();
+			$("#confirmButton").attr('href', confirmButtonLink);
 
 			//Show the modal div
 			$("#myModal").modal();
@@ -53,10 +49,27 @@ $(document).ready(function(){
 			$("#modalContent").text("Update "+ element +" operation.");
 
 			//Setting the delete button with the selected user id		
-			var confirmButtonLink = editPath + '/' + $('table input[type=radio]:checked').val();
-			$("#confirmUpdateButton").attr('href', confirmButtonLink);		
-			$("#confirmUpdateButton").show();
-			$("#confirmDeleteButton").hide();
+			var confirmButtonLink = editPath + '/' + $('table input[type=radio]:checked').val();			
+			$("#confirmButton").attr('href', confirmButtonLink);
+
+			//Show the modal div
+			$("#myModal").modal();
+		}
+	});
+
+	/** 
+	Check if status was pressioned, and modifies the modal.
+	*/
+	$("#statusButton").click(function(){
+
+		if(isItemSelected()){			
+			//Changing the information on modal
+			$("#modalHeader").text("Statu of the  "+ element);
+			$("#modalContent").text("Changing the status of the image "+ element +" operation.");
+
+			//Setting the delete button with the selected user id		
+			var pathButtonLink = statusPath + '/' + $('table input[type=radio]:checked').val();
+			$("#confirmButton").attr('href', pathButtonLink);
 
 			//Show the modal div
 			$("#myModal").modal();

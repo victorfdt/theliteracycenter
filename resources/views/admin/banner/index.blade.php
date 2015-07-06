@@ -25,9 +25,9 @@
 				<!-- Type -->
 				<td>
 					@if ($image->type == $image::MAIN)
-						{{'Main page'}}
+					{{'Main page'}}
 					@elseif ($image->type == $image::GENERAL)
-						{{'Genereal'}}					
+					{{'General'}}					
 					@endif
 				</td>
 				<td>{{ $image->order }}</td>
@@ -35,9 +35,9 @@
 				<!-- Status -->
 				<td>
 					@if ($image->active)
-						{{'Active'}}
+					{{'Active'}}
 					@else
-						{{'Deactivate'}}
+					{{'Deactivate'}}
 					@endif
 				</td>								
 			</tr>
@@ -49,7 +49,7 @@
 <!-- Buttons -->
 <div class="container text-right">
 
-	<button type="button" class="btn btn-success" id="activeButton">Active/Deactivate</button>
+	<button type="button" class="btn btn-success" id="statusButton">Active/Deactivate</button>
 	<button type="button" class="btn btn-success" id="deleteButton">Delete</button>	
 	<button type="button" class="btn btn-success" id="updateButton">Update</button>	
 	{!! link_to_route('banners.create','Create', [] ,array('class' => 'btn btn-success')) !!}
@@ -57,15 +57,19 @@
 </div>
 
 <!-- Modal -->
-	@include('sections.modal')
+@include('sections.modal')
 
 <script>
+
 	/** Load the necessary information. 
 		These information are used at admin.js
-	 */
-	var deletePath = "{{ url('banners/destroy') }}";
-	var editPath = "{{ url('banners/edit') }}";
-	var element = "image";
+		*/
+		var deletePath = "{{ url('banners/destroy') }}";
+		var editPath = "{{ url('banners/edit') }}";
+		var statusPath = "{{ url('banners/status') }}";
+		var element = "image";
+		
+
 </script>
 
 @stop

@@ -51,5 +51,6 @@ get('banners/edit/{id}', array('as' => 'banners/edit', 'uses' => 'BannersControl
 post('banners/store', array('as' => 'banners/store', 'uses' => 'BannersController@store'));
 patch('banners/update/{id}', array('as' => 'banners/update', 'uses' => 'BannersController@update'));
 get('banners/destroy/{id}', array('as' => 'banners/destroy', 'uses' => 'BannersController@destroy'));
+get('banners/status/{id}', array('as' => 'banners/status', 'uses' => 'BannersController@changeStatus'));
 $router->resource('banners', 'BannersController');
 

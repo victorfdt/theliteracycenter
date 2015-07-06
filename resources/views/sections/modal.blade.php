@@ -12,8 +12,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-success" id="confirmDeleteButton" href="#">Confirm</a>
-				<a class="btn btn-success" id="confirmUpdateButton" href="#">Confirm</a>				
+				<a class="btn btn-success" id="confirmButton" href="#">Confirm</a>				
 			</div>
 		</div>
 		

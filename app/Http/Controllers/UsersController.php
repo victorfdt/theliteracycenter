@@ -102,8 +102,9 @@ class UsersController extends Controller
     public function edit($id)
     {
         //Find the selected user
-        $user = $this->user->find($id);             
-        return view('admin.user.edit', compact('user'));
+        $user = $this->user->find($id); 
+        $role = new Role();            
+        return view('admin.user.edit', compact('user', 'role'));
     }
 
     /**

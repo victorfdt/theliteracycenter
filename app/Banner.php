@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Controllers\Controller\BannersController;
 
 class Banner extends Model
 {
@@ -22,4 +23,9 @@ class Banner extends Model
      * @var array
      */
     protected $fillable = ['name', 'path', 'type', 'order', 'active'];
+
+    public function getGeneralBannerPath(){
+        $banner = $this->where('type', Banner::GENERAL)->get()->first();        
+        return $banner->path;
+    }
 }
