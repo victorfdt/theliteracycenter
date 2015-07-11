@@ -5,7 +5,7 @@
 <h3>Banner's images create</h3>	
 
 <div class="container">
-	{!! Form::open(array('route' => 'banners.store', 'class' => 'form-horizontal', 'method' => 'post')) !!}
+	{!! Form::open(array('route' => 'banners.store', 'class' => 'form-horizontal', 'method' => 'post', 'files' => 'true')) !!}
 
 	@include('admin.banner._form')
 

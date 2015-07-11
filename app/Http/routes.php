@@ -24,7 +24,8 @@ Route::controllers([
 ]);
 
 /** PAGES */
-get('about', array('as' => 'pages.about', 'uses' => 'PagesController@about'));
+get('about', array('as' => 'pages/about', 'uses' => 'PagesController@about'));
+get('faq', array('as' => 'pages/faq', 'uses' => 'PagesController@faq'));
 get('/', array('as' => '/', 'uses' => 'PagesController@index'));
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
 
@@ -54,3 +55,12 @@ get('banners/destroy/{id}', array('as' => 'banners/destroy', 'uses' => 'BannersC
 get('banners/status/{id}', array('as' => 'banners/status', 'uses' => 'BannersController@changeStatus'));
 $router->resource('banners', 'BannersController');
 
+/** IMAGE */
+get('image/edit/{id}', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));
+post('image/store', array('as' => 'image/store', 'uses' => 'ImagesController@store'));
+patch('image/update/{id}', array('as' => 'image/update', 'uses' => 'ImagesController@update'));
+get('image/destroy/{id}', array('as' => 'image/destroy', 'uses' => 'ImagesController@destroy'));
+get('image/status/{id}', array('as' => 'image/status', 'uses' => 'ImagesController@changeStatus'));
+get('image/index', array('as' => 'image/index', 'uses' => 'ImagesController@index'));
+get('image/edit', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));
+get('image/create', array('as' => 'image/create', 'uses' => 'ImagesController@create'));

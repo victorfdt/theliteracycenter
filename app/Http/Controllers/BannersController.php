@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BannerRequest;
+use File;
+use Session;
 
 use App\Banner;
 
@@ -52,6 +54,34 @@ class BannersController extends Controller
         return view('admin.banner.create', compact('banner'));
     }
 
+    /*
+        Gets the image uploaded from the form, and moves it to the directory.
+    */
+    public function uploadImage($request, $banner){
+    //Getting the upload image
+        $imageName = $request->input('name') . '.' . $request->file('image')->getClientOriginalExtension();
+        
+    //Moving the image to the folder, and getting the path
+        $request->file('image')->move(base_path() . '/public/images/upload/banner', $imageName);
+        $bannerPath = 'images/upload/banner'. '/' . $imageName;
+        
+    //Setting the path
+        $banner->path = $bannerPath;
+    }
+
+    /*
+        Move all banners' order forward if the parameterized order match
+    */
+        public function adjustBannersOrder($type, $order){
+            $banners = Banner::where('type', $type)->where('order','>=', $order)->get();  
+            
+            foreach ($banners as $image) {
+
+                $image->order = $image->order + 1;
+                $image->save();
+            }
+        }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -59,10 +89,21 @@ class BannersController extends Controller
      */
     public function store(BannerRequest $request)
     {
-        //Creating the new user
+        //If the order of this banner have been already used,
+        //move greater order one step forward
+        $type = $request->input('type');
+        $order = $request->input('order');
+
+        $this->adjustBannersOrder($type, $order);
+
+        //Creating the new banner image
         $banner = $this->banner->create($request->all());
         $banner->active = true;
 
+        //Moves and sets the uploaded image
+        $this->uploadImage($request, $banner); 
+
+        //Saving
         $banner->save();
 
         //Sending the user to the accounts page
@@ -100,14 +141,25 @@ class BannersController extends Controller
      */
     public function update($id, BannerRequest $request)
     {
+        //If the order of this banner have been already used,
+        //move greater order one step forward
+        $type = $request->input('type');
+        $order = $request->input('order');
+
+        $this->adjustBannersOrder($type, $order);
+
         //Fill the banner with the new form fields
         $banner = $this->banner->find($id);
         $banner->fill($request->all());
+
+        //Moves and sets the uploaded image
+        $this->uploadImage($request, $banner);
+
         $banner->save();
 
         //Sending the user to the accounts page
         return redirect()->route('banners.index');
-    }
+ }
 
     /**
      * Remove the specified resource from storage.
@@ -117,8 +169,32 @@ class BannersController extends Controller
      */
     public function destroy($id)
     {
-        $this->banner->find($id)->delete();
+        $banner = $this->banner->find($id);
 
+        //Must be always at least one activate banner of each type     
+        if($banner->where('type', $banner->type)->where('active', true)->count() == 1){
+
+            //Set the message and the error class
+            Session::flash('message', 'Must be registered at least one activate of this image category!'); 
+            Session::flash('alert-class', 'alert-danger');
+
+        } else {
+
+            //Moving the order of all banners of sted backward
+            $banners = $banner->where('type', $banner->type)->where('order','>', $banner->order)->get();            
+            foreach ($banners as $image) {
+
+                $image->order = $image->order - 1;
+                $image->save();
+            }            
+
+            //Delete the banner image on the filesystem
+            File::delete($banner->path);
+
+            //Delete the banner from the database
+            $banner->delete();
+        }
+        
         //Sending the user to the accounts page
         return redirect()->route('banners.index');
     }
@@ -126,18 +202,30 @@ class BannersController extends Controller
     /* 
         Changes the status of the image
     */
-    public function changeStatus($id){
-        $banner = $this->banner->find($id);       
+        public function changeStatus($id){
+            $banner = $this->banner->find($id);
 
-        if($banner->active == true){
-            $banner->active = false;
-        } else{
-            $banner->active = true;
-        }
+            //Checking if there is only on active banner of the banner type.
+            if($banner->where('type', $banner->type)->where('active', true)->count() == 1){
 
-        $banner->save();
+            //Set the message and the error class
+                Session::flash('message', 'You can not deactive the only active button.'); 
+                Session::flash('alert-class', 'alert-danger');
 
-        //Sending the user to the accounts page
-        return redirect()->route('banners.index');
-    }    
-}
+            } else {
+
+                //Change the status
+                if($banner->active == true){
+                    $banner->active = false;
+                } else{
+                    $banner->active = true;
+                }
+
+                //Save the change
+                $banner->save();
+            }
+
+            //Sending the user to the accounts page
+            return redirect()->route('banners.index');
+        }    
+    }

@@ -50,7 +50,7 @@
 </div>
 
 <!-- Buttons -->
-<div class="container text-right">
+<div class="container text-right actionsButton">
 	
 	<button type="button" class="btn btn-success" id="deleteButton">Delete</button>	
 	<button type="button" class="btn btn-success" id="updateButton">Update</button>	

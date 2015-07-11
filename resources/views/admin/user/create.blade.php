@@ -17,7 +17,7 @@
 
 </div>
 
-<div class="container text-right">
+<div class="container text-right actionsButton">
 	{!! link_to_route('users.index','Back', [] ,array('class' => 'btn btn-success')) !!}
 </div>
 @stop

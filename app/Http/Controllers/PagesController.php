@@ -32,6 +32,17 @@ class PagesController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function faq()
+    {
+        return view('pages.student.faq');
+
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return Response

@@ -38,20 +38,20 @@ class BannerRequest extends Request
             case 'POST':
             {
                 return [
-                'name'   =>  'required',
+                'name'   =>  'required|unique:banners,name',
                 'type'   =>  'required',
                 'order'   =>  'required|numeric',
-                'path'   =>  'required|unique:banners,path',                
+                'image'   =>  'required|image|mimes:jpeg,bmp,png',                
                 ];
             }
             case 'PUT':
             case 'PATCH':
             {
                 return [                
-                'name'   =>  'required',
+                'name'   =>  'required|unique:banners,name,'. $banner->id,
                 'type'   =>  'required',
                 'order'   =>  'required|numeric',
-                'path'   =>  'required|unique:banners,path,'.$banner->id,
+                'image'   =>  'required|image|mimes:jpeg,bmp,png',  
                 ];
             }
             default:break;

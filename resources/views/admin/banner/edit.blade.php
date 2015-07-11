@@ -7,7 +7,7 @@
 	<h3>Update image</h3>
 
 	<div class="container">			
-		{!! Form::model($banner, array('route' => ['banners/update', $banner->id], 'class' => 'form-horizontal', 'method' => 'PATCH')) !!}
+		{!! Form::model($banner, array('route' => ['banners/update', $banner->id], 'class' => 'form-horizontal', 'method' => 'PATCH', 'files' => 'true')) !!}
 
 			@include('admin.banner._form')
 

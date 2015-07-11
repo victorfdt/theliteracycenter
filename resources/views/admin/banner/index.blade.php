@@ -2,7 +2,15 @@
 
 @section('content')
 <div class="container">
-	<h3>Banner's images</h3>		
+	<h3>Banner's images</h3>	
+
+	<!-- Error message -->
+	@if(Session::has('message'))
+	<div class="alert {{ Session::get('alert-class', 'alert-info') }}">
+		<label for="name">{{ Session::get('message') }}</label>
+
+	</div>
+	@endif
 
 	<table class="table table-striped" id="usersTable">
 		<thead>
@@ -49,7 +57,7 @@
 <!-- Buttons -->
 <div class="container text-right">
 
-	<button type="button" class="btn btn-success" id="statusButton">Active/Deactivate</button>
+	<button type="button" class	="btn btn-success" id="statusButton">Active/Deactivate</button>
 	<button type="button" class="btn btn-success" id="deleteButton">Delete</button>	
 	<button type="button" class="btn btn-success" id="updateButton">Update</button>	
 	{!! link_to_route('banners.create','Create', [] ,array('class' => 'btn btn-success')) !!}
@@ -70,6 +78,6 @@
 		var element = "image";
 		
 
-</script>
+		</script>
 
-@stop
+		@stop

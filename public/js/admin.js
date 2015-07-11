@@ -9,10 +9,11 @@ $(document).ready(function(){
 			//Changing the information on modal
 			$("#modalHeader").text("Select an " + element);
 			$("#modalContent").text("You have to select an " + element);
-
+			$("#confirmButton").hide();
 			//Show the modal div
 			$("#myModal").modal();
 		} else {
+			$("#confirmButton").show();
 			selected = true;
 		}
 
@@ -58,6 +59,7 @@ $(document).ready(function(){
 	});
 
 	/** 
+	Banner change status button
 	Check if status was pressioned, and modifies the modal.
 	*/
 	$("#statusButton").click(function(){

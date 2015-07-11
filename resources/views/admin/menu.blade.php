@@ -10,16 +10,13 @@
             <li class='has-sub'><a href='#'><span>Index</span></a>
                <ul>
                   <li>
-                     {!! link_to_route('banners.index', 'Banner') !!}
+
                   </li>
-                  <li><a href='#'><span>Content</span></a></li>
-                 
+                  <li><a href='#'><span>Content</span></a></li>                  
                </ul>
             </li>
-            <li class='has-sub'><a href='#'><span>Side Bar</span></a>
-               <ul>
-                  <li><a href='#'><span>Photos</span></a></li>                    
-               </ul>
+            <li>
+               {!! link_to_route('image/index', 'Images') !!}
             </li>
          </ul>
       </li>
@@ -30,7 +27,7 @@
             <li><a href='#'><span>Documents</span></a></li>
             <li><a href='#'><span>Reports</span></a></li>
             <li><a href='#'><span>Form</span></a></li>
-                        
+
          </ul>
       </li> 
 
@@ -49,22 +46,22 @@
 
    </ul>
 
-      <ul class="navbar-right">
-         @if (Auth::guest())
+   <ul class="navbar-right">
+      @if (Auth::guest())
 
          <!--
          <li><a href="{{ url('/auth/login') }}">Login</a></li>
          <li><a href="{{ url('/auth/register') }}">Register</a></li>
 
       -->
-         @else
-         <li class='has-sub'>
-            <a href="#"> <span>{{ Auth::user()->name }}</span></a>
-            <ul>
-               <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-               <li><a href="{{ url('admin/password/edit') }}">Change password</a></li>
-            </ul>
-         </li>
-         @endif
-      </ul>
-   </div>
+      @else
+      <li class='has-sub'>
+         <a href="#"> <span>{{ Auth::user()->name }}</span></a>
+         <ul>
+            <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+            <li><a href="{{ url('admin/password/edit') }}">Change password</a></li>
+         </ul>
+      </li>
+      @endif
+   </ul>
+</div>

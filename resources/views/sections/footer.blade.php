@@ -5,7 +5,9 @@
 		<div class="row">
 			<div class="7u vcenter">
 				<section>					
-					<img src="images/logo/logo2.png" class="footer_logo">
+					<a href="{{$footer->link}}">
+						{!! HTML::image($footer->path, '', array('class' => 'footer_logo')) !!}
+					</a>
 				</section>				
 			</div>
 			
