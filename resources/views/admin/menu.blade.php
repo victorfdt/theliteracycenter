@@ -46,7 +46,7 @@
 
    </ul>
 
-   <ul class="navbar-right">
+   <ul class="navbar-right" style="padding-right: 40px; ">
       @if (Auth::guest())
 
          <!--

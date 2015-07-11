@@ -18,20 +18,20 @@
 					<ul class="default">
 						<li>
 							<a href="https://www.facebook.com/TheLiteracyCenter">
-								<img src="images/social/facebook.png">
+								{!! HTML::image('images/social/facebook.png') !!}								
 							</a>
 
 							<a href="https://www.linkedin.com/company/the-literacy-center">
-								<img src="images/social/linkedin.png">
-								<a/>
+								{!! HTML::image('images/social/linkedin.png') !!}
+							<a/>
 
-								<a href="https://www.pinterest.com/literacycenter/">
-									<img src="images/social/pinterest.png">
-								</a>
-								<a href="https://twitter.com/LiteracyCenter">
-									<img src="images/social/twitter.png">
-								</a>
-							</li>
+							<a href="https://www.pinterest.com/literacycenter/">
+								{!! HTML::image('images/social/pinterest.png') !!}
+							</a>
+							<a href="https://twitter.com/LiteracyCenter">
+								{!! HTML::image('images/social/twitter.png') !!}
+							</a>
+						</li>
 							
 							
 						</ul>

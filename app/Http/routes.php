@@ -24,10 +24,11 @@ Route::controllers([
 ]);
 
 /** PAGES */
-get('about', array('as' => 'pages/about', 'uses' => 'PagesController@about'));
-get('faq', array('as' => 'pages/faq', 'uses' => 'PagesController@faq'));
-get('/', array('as' => '/', 'uses' => 'PagesController@index'));
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
+Route::get('/', 'PagesController@index');
+Route::get('/{name}', 'PagesController@goToPage');
+Route::get('/student/{name}', 'PagesController@goToStudentPage');
+Route::get('/volunteer/{name}', 'PagesController@goToVolunteerPage');
 
 
 /** USERS */

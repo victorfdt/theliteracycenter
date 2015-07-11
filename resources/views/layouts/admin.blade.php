@@ -14,9 +14,6 @@
 	<!-- Header -->
 	<div id="header">
 		<div>
-
-			<!-- TODO = ONLY SHOW WHEN THE ADMIN IS LOOGED!!!!!--> 
-
 			<!-- Logo -->
 			@include('sections.logo')
 
@@ -26,13 +23,11 @@
 		</div>
 	</div>
 	<!-- Header -->
-	
-
 
 		<!-- Main -->
 		<div id="main" class="container">
 			<div class="row">
-				<div class="12u">					
+				<div class="12u">
 					@yield('content')					
 				</div>				
 			</div>

@@ -9,6 +9,50 @@ use App\Http\Controllers\Controller;
 
 class PagesController extends Controller
 {
+
+    /* Arrays with the mapping of the pages */
+    private $pages = array(
+            'index'         => 'pages.index',
+            'about'         => 'pages.about',
+            'student/faq'   => 'pages.student.faq',       
+        );
+
+
+    private $studentPages = array(
+            'faq'   => 'pages.student.faq',
+            'client'      => 'pages.student.client',      
+        );
+
+    private $volunteerPages = array(
+            'tutor'   => 'pages.volunteer.tutor',
+            'becomeavolunteer'      => 'pages.volunteer.becomeavolunteer',
+            'linkandfile'      => 'pages.volunteer.linkandfile',
+            'tutoringlocation'      => 'pages.volunteer.tutoringlocation',
+            'volunteerworkshop'      => 'pages.volunteer.volunteerworkshop',  
+        );
+
+    public function goToPage($name){        
+
+        $pageToGo = $this->pages[$name];
+
+        return view($pageToGo);
+    }
+
+    public function goToStudentPage($name){
+
+        $pageToGo = $this->studentPages[$name];
+
+        return view($pageToGo);
+    }
+
+    public function goToVolunteerPage($name){
+
+        $pageToGo = $this->volunteerPages[$name];
+
+        return view($pageToGo);
+    }
+    
+
     /**
      * Display a listing of the resource.
      *
@@ -16,18 +60,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        
         return view('pages.index');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function about()
-    {
-        return view('pages.about');
 
     }
 
