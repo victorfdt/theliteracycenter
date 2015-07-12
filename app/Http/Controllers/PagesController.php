@@ -14,7 +14,7 @@ class PagesController extends Controller
     private $pages = array(
             'index'         => 'pages.index',
             'about'         => 'pages.about',
-            'student/faq'   => 'pages.student.faq',       
+            'donate'         => 'pages.donate',
         );
 
 
@@ -26,9 +26,19 @@ class PagesController extends Controller
     private $volunteerPages = array(
             'tutor'   => 'pages.volunteer.tutor',
             'becomeavolunteer'      => 'pages.volunteer.becomeavolunteer',
-            'linkandfile'      => 'pages.volunteer.linkandfile',
+            'linkandfile'           => 'pages.volunteer.linkandfile',
             'tutoringlocation'      => 'pages.volunteer.tutoringlocation',
-            'volunteerworkshop'      => 'pages.volunteer.volunteerworkshop',  
+            'volunteerworkshop'     => 'pages.volunteer.volunteerworkshop',  
+            'tutorreport'           => 'pages.volunteer.tutorreport',
+        );
+
+    private $eventPages = array(
+            'calendar'                 => 'pages.event.calendar',
+        );
+
+    private $donatePages = array(
+            'contribution'             => 'pages.donate.contribution',
+            'withlist'                 => 'pages.donate.wishlist',
         );
 
     public function goToPage($name){        
@@ -51,7 +61,20 @@ class PagesController extends Controller
 
         return view($pageToGo);
     }
-    
+
+    public function goToEventPage($name){
+
+        $pageToGo = $this->eventPages[$name];
+
+        return view($pageToGo);
+    } 
+
+     public function goToDonatePage($name){
+
+        $pageToGo = $this->donatePages[$name];
+
+        return view($pageToGo);
+    }    
 
     /**
      * Display a listing of the resource.

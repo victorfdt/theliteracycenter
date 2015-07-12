@@ -23,13 +23,10 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-/** PAGES */
-$router->resource('pages', 'PagesController', ['except' => ['pages']]);
-Route::get('/', 'PagesController@index');
-Route::get('/{name}', 'PagesController@goToPage');
-Route::get('/student/{name}', 'PagesController@goToStudentPage');
-Route::get('/volunteer/{name}', 'PagesController@goToVolunteerPage');
-
+/** AUTHENTICATION */
+get('/login', 'Auth\AuthController@getLogin');
+get('/logout', 'Auth\AuthController@getLogout');
+get('/password', 'Auth\PasswordController@getEmail');
 
 /** USERS */
 get('users/edit/{id}', array('as' => 'users/edit', 'uses' => 'UsersController@edit'));
@@ -37,11 +34,6 @@ post('users/store', array('as' => 'users/store', 'uses' => 'UsersController@stor
 patch('users/update/{id}', array('as' => 'users/update', 'uses' => 'UsersController@update'));
 get('users/destroy/{id}', array('as' => 'users/destroy', 'uses' => 'UsersController@destroy'));
 $router->resource('users', 'UsersController');
-
-/** AUTHENTICATION */
-get('/login', 'Auth\AuthController@getLogin');
-get('/logout', 'Auth\AuthController@getLogout');
-get('/password', 'Auth\PasswordController@getEmail');
 
 /** ADMIN */
 get('admin', array('as' => 'admin', 'uses' => 'AdminController@index'));
@@ -65,3 +57,12 @@ get('image/status/{id}', array('as' => 'image/status', 'uses' => 'ImagesControll
 get('image/index', array('as' => 'image/index', 'uses' => 'ImagesController@index'));
 get('image/edit', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));
 get('image/create', array('as' => 'image/create', 'uses' => 'ImagesController@create'));
+
+/** PAGES */
+$router->resource('pages', 'PagesController', ['except' => ['pages']]);
+Route::get('/', 'PagesController@index');
+Route::get('/{name}', 'PagesController@goToPage');
+Route::get('/student/{name}', 'PagesController@goToStudentPage');
+Route::get('/volunteer/{name}', 'PagesController@goToVolunteerPage');
+Route::get('/event/{name}', 'PagesController@goToEventPage');
+Route::get('/donate/{name}', 'PagesController@goToDonatePage');

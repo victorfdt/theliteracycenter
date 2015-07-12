@@ -115,10 +115,15 @@
   right: 17px;
   top: 22px;
 }
+
+/*
+Removing this fixed the problem of remove the down arrow when
+the button was actived.
 #cssmenu > ul > li.has-sub.active > a::after,
 #cssmenu > ul > li.has-sub:hover > a {
   border-top-color: #ffffff;
 }
+*/ 
 #cssmenu ul ul {
   position: absolute;
   left: -9999px;

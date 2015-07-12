@@ -1,4 +1,3 @@
-
 ( function( $ ) {
 $( document ).ready(function() {
 
@@ -31,10 +30,10 @@ $('#cssmenu').prepend('<div id="menu-button">Menu</div>');
 		menu_button_id += 'blog';
 	} else if(url.indexOf('newsletter') != -1){
 		menu_button_id += 'newsletter';
-	} else if(url.indexOf('events') != -1){
-		menu_button_id += 'events';
-	} else if(url.indexOf('volunteers') != -1){
-		menu_button_id += 'volunteers';
+	} else if(url.indexOf('event') != -1){
+		menu_button_id += 'event';
+	} else if(url.indexOf('volunteer') != -1){
+		menu_button_id += 'volunteer';
 	} else {
 		menu_button_id += 'home';
 	}

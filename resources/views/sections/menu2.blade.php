@@ -1,10 +1,10 @@
 <div id='cssmenu'>
    <ul>
-      <li>
+      <li id="menu_home">
          <a href="{{ url('/index') }}">Home</a>
       </li>
 
-      <li class='has-sub'><a href="{{ url('/student/') }}"><span>Student</span></a>
+      <li id="menu_student" class='has-sub'><a href="#"><span>Student</span></a>
          <ul>
             <li>               
                <a href="{{ url('/student/faq') }}">FAQ</a>
@@ -15,6 +15,18 @@
          </ul>
       </li>
 
+      <li id="menu_donate" class='has-sub'><a href="#"><span>Donate</span></a>
+         <ul>
+            <li>               
+               <a href="{{ url('/donate/contribution') }}">Contribution</a>
+            </li>
+            <li>               
+               <a href="{{ url('/donate/wishlist') }}">Wishlist</a>
+            </li>  
+         </ul>
+      </li>
+
+<!-- 
       <li class='has-sub'><a href='#'><span>Donate</span></a>
          <ul>
             <li class='has-sub'><a href='#'><span>Product 1</span></a>
@@ -32,15 +44,24 @@
                </ul>
             </li>
          </ul>
-      </li>         
-      <li>
+      </li>  
+
+      -->       
+      <li id="menu_about">
             <a href="{{ url('/about') }}">About</a>
       </li>
       <li><a href='#'><span>Blog</span></a></li>
       <li><a href='#'><span>Newsletter</span></a>   
-      <li class='last'><a href='#'><span>Events</span></a></li>      
+      <li id="menu_event" class='has-sub'><a href='#'><span>Events</span></a>
+         <ul>
+            <li>               
+               <a href="{{ url('/event/calendar') }}">Calendar</a>
+            </li>                      
+         </ul>
+
+      </li>      
       
-      <li class='has-sub'><a href="#"><span>Volunteer</span></a>
+      <li id="menu_volunteer" class='has-sub'><a href="#"><span>Volunteer</span></a>
          <ul>
             <li>               
                <a href="{{ url('/volunteer/tutor') }}">Tutor</a>
@@ -56,7 +77,10 @@
             </li> 
             <li>               
                <a href="{{ url('/volunteer/volunteerworkshop') }}">Workshop</a>
-            </li> 
+            </li>
+            <li>               
+               <a href="{{ url('/volunteer/tutorreport') }}">Monthly tutor report</a>
+            </li>
          </ul>
       </li>
 
