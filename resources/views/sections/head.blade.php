@@ -9,6 +9,7 @@
 <!-- Javascript -->	
 
 {!! HTML::script('js/jquery-2.1.4.min.js') !!}
+{!! HTML::script('js/jquery.mask.min.js') !!}
 {!! HTML::script('js/skel.min.js') !!}
 {!! HTML::script('js/skel-panels.min.js') !!}
 {!! HTML::script('js/init.js') !!}

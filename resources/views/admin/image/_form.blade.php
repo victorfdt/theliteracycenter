@@ -65,25 +65,7 @@
 
   <script>
   $(document).ready(function(){
-
-    //Preview image funcionality
-    function readURL(input) {
-
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-          $('#imagePreview').attr('src', e.target.result);
-        }
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $("#inputFile").change(function(){
-      readURL(this);
-    });
-
+    
     /* Only these main page and side bar type can add order */
     if($("#type").val() == 1 || $("#type").val() == 3){
       $("#order").show();

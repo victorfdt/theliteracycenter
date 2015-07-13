@@ -211,12 +211,13 @@ class ImagesController extends Controller
     public function changeStatus($id){
         $image = $this->image->find($id);
 
-        //Checking if there is only one active image of the image type.
-        if($image->where('type', $image->type)->where('active', true)->count() == 1){
 
-        //Set the message and the error class
-        Session::flash('message', 'You can not deactive the only active image of this category.'); 
-        Session::flash('alert-class', 'alert-danger');
+        //Checking if there is only one active image of the image type.
+        if($image->where('type', $image->type)->where('active', true)->where('id', $image->id)->count() == 1){
+
+            //Set the message and the error class
+            Session::flash('message', 'You can not deactive the only active image of this category.'); 
+            Session::flash('alert-class', 'alert-danger');
 
         } else {
 

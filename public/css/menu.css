@@ -34,7 +34,7 @@
   top: 0em;        /* Fixed position*/
   padding-bottom: 50px;
   font-family: 'Open Sans', Helvetica, sans-serif;
-  z-index: 999;
+  z-index: 998;
 
 
   /*
@@ -78,11 +78,12 @@
   padding: 18px 25px 21px 25px;
   /* border-right: 1px solid rgba(80, 80, 80, 0.12);   */    
   text-decoration: none;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   color: #00a8cf; /* Text color*/
   text-transform: uppercase;
-  /* letter-spacing: 1px; */
+  letter-spacing: 1px;
+
 }
 #cssmenu > ul > li:hover > a,
 #cssmenu > ul > li > a:hover{
@@ -130,7 +131,7 @@ the button was actived.
   top: 60px;
   padding-top: 6px;
   font-size: 13px;
-  opacity: 0;
+  opacity: 0;  
   -webkit-transition: top 0.2s ease, opacity 0.2s ease-in;
   -moz-transition: top 0.2s ease, opacity 0.2s ease-in;
   -ms-transition: top 0.2s ease, opacity 0.2s ease-in;
@@ -182,6 +183,7 @@ the button was actived.
   top: 40px;
   left: 0;
   opacity: 1;
+  z-index: 999;
 }
 #cssmenu.align-right > ul > li:hover > ul {
   left: auto;

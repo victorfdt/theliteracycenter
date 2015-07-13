@@ -36,6 +36,11 @@
          {!! link_to_route('users.index', 'User') !!}
       </li>
 
+      <!-- Members -->
+      <li>
+         {!! link_to_route('member/index', 'Member') !!}
+      </li>
+
       <!-- Files -->
       <li class='has-sub'><a href='#'><span>Files</span></a>   
          <li class='last'><a href='#'><span>Newletters</span></a></li>         

@@ -58,11 +58,17 @@ get('image/index', array('as' => 'image/index', 'uses' => 'ImagesController@inde
 get('image/edit', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));
 get('image/create', array('as' => 'image/create', 'uses' => 'ImagesController@create'));
 
+/** MEMBER */
+get('member/edit/{id}', array('as' => 'member/edit', 'uses' => 'MembersController@edit'));
+post('member/store', array('as' => 'member/store', 'uses' => 'MembersController@store'));
+patch('member/update/{id}', array('as' => 'member/update', 'uses' => 'MembersController@update'));
+get('member/destroy/{id}', array('as' => 'member/destroy', 'uses' => 'MembersController@destroy'));
+get('member/index', array('as' => 'member/index', 'uses' => 'MembersController@index'));
+get('member/edit', array('as' => 'member/edit', 'uses' => 'MembersController@edit'));
+get('member/create', array('as' => 'member/create', 'uses' => 'MembersController@create'));
+
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
 Route::get('/', 'PagesController@index');
 Route::get('/{name}', 'PagesController@goToPage');
-Route::get('/student/{name}', 'PagesController@goToStudentPage');
-Route::get('/volunteer/{name}', 'PagesController@goToVolunteerPage');
-Route::get('/event/{name}', 'PagesController@goToEventPage');
-Route::get('/donate/{name}', 'PagesController@goToDonatePage');
+Route::get('/{section}/{name}', 'PagesController@goToSectionPage');

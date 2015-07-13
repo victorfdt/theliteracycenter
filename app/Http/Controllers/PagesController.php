@@ -12,69 +12,83 @@ class PagesController extends Controller
 
     /* Arrays with the mapping of the pages */
     private $pages = array(
-            'index'         => 'pages.index',
-            'about'         => 'pages.about',
-            'donate'         => 'pages.donate',
+        'index'                             => 'pages.index',
+        'about'                             => 'pages.about',
+        'donate'                            => 'pages.donate',
         );
 
 
     private $studentPages = array(
-            'faq'   => 'pages.student.faq',
-            'client'      => 'pages.student.client',      
+        'faq'                               => 'pages.student.faq',
+        'client'                            => 'pages.student.client',      
         );
 
     private $volunteerPages = array(
-            'tutor'   => 'pages.volunteer.tutor',
-            'becomeavolunteer'      => 'pages.volunteer.becomeavolunteer',
-            'linkandfile'           => 'pages.volunteer.linkandfile',
-            'tutoringlocation'      => 'pages.volunteer.tutoringlocation',
-            'volunteerworkshop'     => 'pages.volunteer.volunteerworkshop',  
-            'tutorreport'           => 'pages.volunteer.tutorreport',
+        'tutor'   => 'pages.volunteer.tutor',
+        'becomeavolunteer'                  => 'pages.volunteer.becomeavolunteer',
+        'linkandfile'                       => 'pages.volunteer.linkandfile',
+        'tutoringlocation'                  => 'pages.volunteer.tutoringlocation',
+        'volunteerworkshop'                 => 'pages.volunteer.volunteerworkshop',  
+        'tutorreport'                       => 'pages.volunteer.tutorreport',
         );
 
     private $eventPages = array(
-            'calendar'                 => 'pages.event.calendar',
+        'calendar'                          => 'pages.event.calendar',
         );
 
     private $donatePages = array(
-            'contribution'             => 'pages.donate.contribution',
-            'withlist'                 => 'pages.donate.wishlist',
+        'contribution'                      => 'pages.donate.contribution',
+        'wishlist'                          => 'pages.donate.wishlist',
         );
+    
+    private $aboutPages = array(
+        'theliteracycenter'                 => 'pages.about.theliteracycenter',
+        'staff'                             => 'pages.about.staff',
+        'boardofdirectors'                  => 'pages.about.boardofdirectors',
+        );
+    
 
-    public function goToPage($name){        
+    /*
+        By the route information, this method will guide the user to the right page.
+        $section = place of the website, for example, about, student
+        $name = name of the page.
+    */
+        public function goToSectionPage($section, $name){
 
-        $pageToGo = $this->pages[$name];
+            switch ($section) {
+                case 'student':
+                $pageToGo = $this->studentPages[$name];
+                break;
 
-        return view($pageToGo);
-    }
+                case 'volunteer':
+                $pageToGo = $this->volunteerPages[$name];
+                break;
 
-    public function goToStudentPage($name){
+                case 'event':
+                $pageToGo = $this->eventPages[$name];
+                break;
 
-        $pageToGo = $this->studentPages[$name];
+                case 'donate':
+                $pageToGo = $this->donatePages[$name];
+                break;
 
-        return view($pageToGo);
-    }
+                case 'about':
+                    $pageToGo = $this->aboutPages[$name];
+                break;
+                                
+                default:
+                $pageToGo = $this->pages[$name];
+            }       
 
-    public function goToVolunteerPage($name){
+            return view($pageToGo);
+        }
 
-        $pageToGo = $this->volunteerPages[$name];
+        public function goToPage($name){
 
-        return view($pageToGo);
-    }
+            $pageToGo = $this->pages[$name];
 
-    public function goToEventPage($name){
-
-        $pageToGo = $this->eventPages[$name];
-
-        return view($pageToGo);
-    } 
-
-     public function goToDonatePage($name){
-
-        $pageToGo = $this->donatePages[$name];
-
-        return view($pageToGo);
-    }    
+            return view($pageToGo);
+        }
 
     /**
      * Display a listing of the resource.
@@ -85,18 +99,7 @@ class PagesController extends Controller
     {
         return view('pages.index');
 
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function faq()
-    {
-        return view('pages.student.faq');
-
-    }
+    }    
 
     /**
      * Show the form for creating a new resource.

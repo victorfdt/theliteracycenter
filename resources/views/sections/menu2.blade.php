@@ -4,7 +4,7 @@
          <a href="{{ url('/index') }}">Home</a>
       </li>
 
-      <li id="menu_student" class='has-sub'><a href="#"><span>Student</span></a>
+      <li id="menu_student" class='has-sub'><a href="#>"<span>Student</span></a>
          <ul>
             <li>               
                <a href="{{ url('/student/faq') }}">FAQ</a>
@@ -47,10 +47,22 @@
       </li>  
 
       -->       
-      <li id="menu_about">
-            <a href="{{ url('/about') }}">About</a>
+      <li id="menu_about"  class='has-sub'><a href="#">About</a>
+         <ul>
+            <li>               
+               <a href="{{ url('/about/theliteracycenter') }}">The Literacy Center</a>
+            </li>
+
+            <li>               
+               <a href="{{ url('/about/staff') }}">Staff</a>
+            </li>
+
+            <li>               
+               <a href="{{ url('/about/boardofdirectors') }}">Board of directors</a>
+            </li>                     
+         </ul>
       </li>
-      <li><a href='#'><span>Blog</span></a></li>
+      <li><a href='http://www.litcenter.org/'><span>Blog</span></a></li>
       <li><a href='#'><span>Newsletter</span></a>   
       <li id="menu_event" class='has-sub'><a href='#'><span>Events</span></a>
          <ul>
@@ -58,7 +70,6 @@
                <a href="{{ url('/event/calendar') }}">Calendar</a>
             </li>                      
          </ul>
-
       </li>      
       
       <li id="menu_volunteer" class='has-sub'><a href="#"><span>Volunteer</span></a>
