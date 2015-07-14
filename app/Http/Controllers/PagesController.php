@@ -42,53 +42,52 @@ class PagesController extends Controller
         );
     
     private $aboutPages = array(
-        'theliteracycenter'                 => 'pages.about.theliteracycenter',
-        'staff'                             => 'pages.about.staff',
+        'theliteracycenter'                 => 'pages.about.theliteracycenter',        
         'boardofdirectors'                  => 'pages.about.boardofdirectors',
         );
     
 
     /*
-        By the route information, this method will guide the user to the right page.
-        $section = place of the website, for example, about, student
-        $name = name of the page.
+    By the route information, this method will guide the user to the right page.
+    $section = place of the website, for example, about, student
+    $name = name of the page.
     */
-        public function goToSectionPage($section, $name){
+    public function goToSectionPage($section, $name){
 
-            switch ($section) {
-                case 'student':
-                $pageToGo = $this->studentPages[$name];
-                break;
+        switch ($section) {
+            case 'student':
+            $pageToGo = $this->studentPages[$name];
+            break;
 
-                case 'volunteer':
-                $pageToGo = $this->volunteerPages[$name];
-                break;
+            case 'volunteer':
+            $pageToGo = $this->volunteerPages[$name];
+            break;
 
-                case 'event':
-                $pageToGo = $this->eventPages[$name];
-                break;
+            case 'event':
+            $pageToGo = $this->eventPages[$name];
+            break;
 
-                case 'donate':
-                $pageToGo = $this->donatePages[$name];
-                break;
+            case 'donate':
+            $pageToGo = $this->donatePages[$name];
+            break;
 
-                case 'about':
-                    $pageToGo = $this->aboutPages[$name];
-                break;
-                                
-                default:
-                $pageToGo = $this->pages[$name];
-            }       
+            case 'about':
+            $pageToGo = $this->aboutPages[$name];
+            break;
 
-            return view($pageToGo);
-        }
-
-        public function goToPage($name){
-
+            default:
             $pageToGo = $this->pages[$name];
+        }       
 
-            return view($pageToGo);
-        }
+        return view($pageToGo);
+    }
+
+    public function goToPage($name){
+
+        $pageToGo = $this->pages[$name];
+
+        return view($pageToGo);
+    }
 
     /**
      * Display a listing of the resource.

@@ -66,6 +66,8 @@ get('member/destroy/{id}', array('as' => 'member/destroy', 'uses' => 'MembersCon
 get('member/index', array('as' => 'member/index', 'uses' => 'MembersController@index'));
 get('member/edit', array('as' => 'member/edit', 'uses' => 'MembersController@edit'));
 get('member/create', array('as' => 'member/create', 'uses' => 'MembersController@create'));
+get('about/staff', array('as' => 'about/staff', 'uses' => 'MembersController@staff'));
+get('about/boardofdirectors', array('as' => 'about/boardofdirector', 'uses' => 'MembersController@boardOfdirector'));
 
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);

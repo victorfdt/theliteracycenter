@@ -6,10 +6,10 @@
 
 	<!-- Error message -->
 	@if(Session::has('message'))
-	<div class="alert {{ Session::get('alert-class', 'alert-info') }}">
-		<label for="name">{{ Session::get('message') }}</label>
+		<div class="alert {{ Session::get('alert-class', 'alert-info') }}">
+			<label for="name">{{ Session::get('message') }}</label>
 
-	</div>
+		</div>
 	@endif
 
 	<table class="table table-striped" id="usersTable">
@@ -21,6 +21,7 @@
 				<th>Email</th>				
 				<th>Phone</th>
 				<th>Description</th>
+				<th>Order</th>
 				<th>Position</th>
 				<th>Type</th>
 			</tr>
@@ -34,6 +35,7 @@
 				<td>{{$member->email }}</td>
 				<td>{{$member->phone }}</td>
 				<td>{{$member->description }}</td>
+				<td>{{$member->order }}</td>
 				<td>{{$member->position }}</td>
 				<!-- Type -->
 				<td>

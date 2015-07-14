@@ -1,3 +1,11 @@
+<!-- Error message -->
+  @if(Session::has('message'))
+    <div class="alert {{ Session::get('alert-class', 'alert-info') }}">
+      <label for="name">{{ Session::get('message') }}</label>
+
+    </div>
+  @endif
+
 <!-- NAME -->
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}} ">
   <label for="name" class="col-sm-2 control-label">Name</label>

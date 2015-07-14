@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Helpers\ImageHelper;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -16,6 +17,8 @@ class ImagesController extends Controller
 {
     private $image;
 
+    private $imageHelper;
+
     public function __construct()
     {
         //See if the there is an authenticated user
@@ -24,7 +27,9 @@ class ImagesController extends Controller
         //Check if this user is a admin
         $this->middleware('admin');
 
-        $this->image = new Image();        
+        $this->image = new Image();
+
+        $this->imageHelper = new ImageHelper(); 
     }
 
     /**
@@ -64,14 +69,28 @@ class ImagesController extends Controller
         $type = $request->input('type');
         $order = $request->input('order');
 
-        $this->adjustImagesOrder($type, $order);
+        /* 
+        Laravel can not handle using the request manager the validation
+        of the size image that exceeds the configuration of php.in
+        */
+        if($this->imageHelper->fileImageSizeExceeded($request->file('image'))){
+            //Set the message and the error class
+            Session::flash('message', 'The file image can not be greater than 2MB!'); 
+            Session::flash('alert-class', 'alert-danger');
+
+            return redirect()->back()
+            ->withInput()
+            ->withErrors('image');
+        }
+
+        $this->imageHelper->adjustOrder($type, $order, $this->image, 'store');
 
         //Creating the new image
         $image = $this->image->create($request->all());        
         $image->active = true;
 
         //Moves and sets the uploaded image
-        $this->uploadImage($request, $image); 
+        $this->imageHelper->uploadImage($request, $image); 
 
         //Saving
         $image->save();
@@ -116,24 +135,40 @@ class ImagesController extends Controller
         $type = $request->input('type');
         $order = $request->input('order');
 
-        $this->adjustImagesOrder($type, $order);
+        /* 
+        Laravel can not handle using the request manager the validation
+        of the size image that exceeds the configuration of php.in
+        */
+        if($this->imageHelper->fileImageSizeExceeded($request->file('image'))){
+            //Set the message and the error class
+            Session::flash('message', 'The file image can not be greater than 2MB!'); 
+            Session::flash('alert-class', 'alert-danger');
+
+            return redirect()->back();
+        }
+
+        //Find the image
+        $image = $this->image->find($id);
+
+        //If the admin changed the member order, so it is necessary adjust the others members.
+        if($image->order != $request->input('order')){
+            $this->imageHelper->adjustOrder($type, $order, $this->image, 'update');
+        }
 
         //Fill the image with the new form fields
-        $image = $this->image->find($id);
         $image->fill($request->all());
         
         //Checking if there was uploaded a image
         if ($request->file('image') != null) {
-            
+
             //Delete the old image from the filesystem
             File::delete($image->path);
 
             //Moves and sets the new uploaded image
-            $this->uploadImage($request, $image);            
+            $this->imageHelper->uploadImage($request, $image);          
         }        
         
         $image->save();
-
 
         //Sending the user to the accounts page
         return redirect()->route('image/index');
@@ -147,6 +182,7 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
+
         $image = $this->image->find($id);
 
         //Must be always at least one activate image of each type     
@@ -158,13 +194,8 @@ class ImagesController extends Controller
 
         } else {
 
-            //Moving the order of all images of sted backward
-            $images = $image->where('type', $image->type)->where('order','>', $image->order)->get();            
-            foreach ($images as $image) {
-
-                $image->order = $image->order - 1;
-                $image->save();
-            }            
+            //Adjust the order of the images when delete this oe.
+            $this->imageHelper->adjustOrder($image->type, $image->order, $image, 'destroy');
 
             //Delete the image on the filesystem
             File::delete($image->path);
@@ -175,38 +206,10 @@ class ImagesController extends Controller
         
         //Sending the user to the accounts page
         return redirect()->route('image/index');
-    }
-
-    /*
-        Gets the image uploaded from the form, and moves it to the directory.
-    */
-    public function uploadImage($request, $image){
-        //Getting the upload image
-        $imageName = $request->input('name') . '.' . $request->file('image')->getClientOriginalExtension();
-        
-        //Moving the image to the folder, and getting the path
-        $request->file('image')->move(base_path() . '/public/' . Image::DIRECTORY, $imageName);
-        $imagePath = Image::DIRECTORY . '/' . $imageName;
-        
-        //Setting the path
-        $image->path = $imagePath;
-    }
-
-    /*
-        Move all images' order one step forward if the parameterized is already used
-    */
-    public function adjustImagesOrder($type, $order){
-        $images = Image::where('type', $type)->where('order','>=', $order)->get();  
-        
-        foreach ($images as $image) {
-
-            $image->order = $image->order + 1;
-            $image->save();
-        }
-    }
+    }    
 
     /* 
-        Changes the status of the image
+    Changes the status of the image
     */
     public function changeStatus($id){
         $image = $this->image->find($id);

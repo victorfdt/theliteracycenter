@@ -18,7 +18,7 @@
 <br><br>
 
 <h3>GuideStar</h3>
-<p>See our Form 990 and related info on GuideStar. The Literacy Center is a 501(C)3 organization. Our tax identification number is 35-2088005.</p>
+<p>See our {!! HTML::link('http://www.guidestar.org/organizations/35-2088005/literacy-center.aspx' ,'Form 990') !!} and related info on GuideStar. The Literacy Center is a 501(C)3 organization. Our tax identification number is 35-2088005.</p>
 
 <a href="http://www.guidestar.org/organizations/35-2088005/literacy-center.aspx">
 	{!! HTML::image('images/guidestar.png', '', ['style' => 'width: 300px;', 'class' => 'text-right;']) !!}

@@ -28,7 +28,7 @@
 			@foreach($images as $image)
 			<tr>
 				<td>{!! Form::radio('imageId', $image->id) !!}</td>				
-				<td>{!! HTML::image($image->path, '', array('style' => 'width: 150px; height: 70px; ')) !!}</td>
+				<td>{!! HTML::image($image->path, '', array('style' => 'width: 150px;')) !!}</td>
 				<td>{{$image->name }}</td>
 				<td>					
 					<a href="{{ $image->link }}">{{ $image->link }}</a>
