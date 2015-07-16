@@ -25,5 +25,5 @@ class Member extends Model
      * @var array
      */
     protected $fillable = ['name', 'email', 'description', 'type',
-     'link', 'path', 'description','phone', 'position', 'order'];
+     'link', 'path', 'description','phone', 'position', 'order', 'link', 'link_label'];
 }

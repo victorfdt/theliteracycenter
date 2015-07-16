@@ -23,6 +23,8 @@ class CreateMemberTable extends Migration
             $table->string('position');
             $table->integer('type');
             $table->integer('order');
+            $table->string('link')->nullabble();
+            $table->string('link_label')->nullabble();
             $table->timestamps();
         });  
     }

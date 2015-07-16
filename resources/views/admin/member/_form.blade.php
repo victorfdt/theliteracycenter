@@ -67,6 +67,24 @@
   </div>
 </div>
 
+<!-- LINK -->
+<div class="form-group {{ $errors->has('link_label') ? 'has-error' : ''}} ">
+  <label for="link_label" class="col-sm-2 control-label">Link</label>
+  <div class="col-sm-5">
+    <div>    
+      {!! Form::text('link_label', null, ['class' => 'form-control', 'placeholder' => 'Label']) !!}
+      {!! $errors->first('link_label', '<span class="help-block">:message</span>') !!}
+    </div>
+    
+    <br>
+
+    <div >      
+      {!! Form::text('link', null, ['class' => 'form-control', 'placeholder' => 'Address']) !!}
+      {!! $errors->first('link', '<span class="help-block">:message</span>') !!}
+    </div>    
+  </div>
+</div>
+
 <!-- DESCRIPTION -->
 <div class="form-group {{ $errors->has('description') ? 'has-error' : ''}} ">
   <label for="description" class="col-sm-2 control-label">Description</label>

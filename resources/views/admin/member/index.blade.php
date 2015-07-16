@@ -20,7 +20,8 @@
 				<th>Name</th>
 				<th>Email</th>				
 				<th>Phone</th>
-				<th>Description</th>
+				<th>Link</th>
+				<th class="col-sm-3">Description</th>
 				<th>Order</th>
 				<th>Position</th>
 				<th>Type</th>
@@ -34,6 +35,7 @@
 				<td>{{$member->name }}</td>
 				<td>{{$member->email }}</td>
 				<td>{{$member->phone }}</td>
+				<td>{!! HTML::link($member->link, $member->link_label) !!}</td>
 				<td>{{$member->description }}</td>
 				<td>{{$member->order }}</td>
 				<td>{{$member->position }}</td>
