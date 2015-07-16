@@ -39,7 +39,6 @@ class MemberRequest extends Request
                 return [
                     'name'      =>  'required|unique:members,name',
                     'position'  =>  'required',
-                    'type'      =>  'required',
                     'order'     =>  'numeric',
                     'image'     =>  'required|image|mimes:jpeg,bmp,png|max:1500'
                 ];
@@ -50,7 +49,6 @@ class MemberRequest extends Request
                 return [
                     'name'  =>  'required|unique:members,name,'. $member->id,
                     'position'  =>  'required',
-                    'type'  =>  'required',
                     'order' =>  'numeric',
                     'image' =>  'image|mimes:jpeg,bmp,png|max:1500'
                 ];

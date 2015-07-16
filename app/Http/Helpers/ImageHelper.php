@@ -22,34 +22,73 @@ class ImageHelper
     /*
     Move all images' order one step forward if the parameterized is already used
     $type = Type / category, for example, Image::MAIN_BANNER
-    $order = number of order of the inserted/updated/deleted model
+    $oldOrder = number of order of the member before the changing
+    $neworder = number of order informed by the admin
     $model = to access the correct tabel, is necessary pass the model
-    $action = string explaning the action, for example 'destroy'
     */
-    public function adjustOrder($type, $order, $model, $action){
-        $logic = '';
+    public function adjustUpdateOrder($type, $oldOrder, $newOrder, $model){        
+        $howMoved = '';
+        $images = '';        
 
-        if($action == 'destroy'){
-            $logic = '>';
-        } else if($action == 'update' || $action == 'store'){
-            $logic = '>=';
+        if($newOrder < $oldOrder){
+            $howMoved = 'up';
+        } else {            
+            $howMoved = 'down';
         }
 
-        $images = $model->where('type', $type)->where('order',$logic, $order)->get();  
+        if($howMoved == 'up') {
 
-        if($action == 'destroy'){
+            $images = $model->where('type', $type)
+            ->where('order','<', $oldOrder)
+            ->where('order','>=', $newOrder)
+            ->get();
+
+            foreach ($images as $image) {
+
+                $image->order = $image->order + 1;
+                $image->save();
+            }           
+
+        } else {         
+            $images = $model->where('type', $type)
+            ->where('order','>', $oldOrder)
+            ->where('order','<=', $newOrder)
+            ->get();
+
             foreach ($images as $image) {
 
                 $image->order = $image->order - 1;
                 $image->save();
             }
-        } else {
-            foreach ($images as $image) {
+        }        
+    }
 
-                $image->order = $image->order + 1;
-                $image->save();
-            }
+    /*
+    Adjusts the order in the moment of creation
+    */
+    public function adjustStoreOrder($type, $order, $model){
+
+        $itens = $model->where('type', $type)->where('order', '>=', $order)->get();
+       
+        foreach ($itens as $item) {
+            $item->order = $item->order + 1;
+            $item->save();
         }
+
+    }
+
+    /*
+    Adjusts the order when deleting.
+    */
+    public function adjustDestroyOrder($type, $order, $model){
+
+        $itens = $model->where('type', $type)->where('order', '>=', $order)->get();
+       
+        foreach ($itens as $item) {
+            $item->order = $item->order - 1;
+            $item->save();
+        }
+
     }
 
     /*

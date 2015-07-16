@@ -18,6 +18,7 @@ class MembersController extends Controller
 
     private $member;
 
+    //Helps to order, upload and manage images;
     private $imageHelper;
 
     public function __construct()
@@ -47,6 +48,9 @@ class MembersController extends Controller
         return view('admin.member.index', compact('members'));
     }
 
+    /*
+    Find the staff members, and send them to the staff view page
+    */
     public function staff()
     {
         //Find the staff members
@@ -55,6 +59,9 @@ class MembersController extends Controller
         return view('pages.about.staff', compact('members'));
     }
 
+/*
+    Find the board of directors members, and send them to the staff view page
+    */
     public function boardOfdirector()
     {
         //Find the board directors members
@@ -71,7 +78,9 @@ class MembersController extends Controller
     public function create()
     {
         $member = $this->member;
-        return view('admin.member.create', compact('member'));
+        $action = 'create';
+
+        return view('admin.member.create', compact('member', 'action'));
     }
 
     /**
@@ -87,8 +96,8 @@ class MembersController extends Controller
         $order = $request->input('order');
 
         /* 
-            Laravel can not handle using the request manager the validation
-            of the size image that exceeds the configuration of php.in
+        Laravel can not handle using the request manager the validation
+        of the size image that exceeds the configuration of php.in
         */
         if($this->imageHelper->fileImageSizeExceeded($request->file('image'))){
             //Set the message and the error class
@@ -96,14 +105,24 @@ class MembersController extends Controller
             Session::flash('alert-class', 'alert-danger');
 
             return redirect()->back()
-                             ->withInput()
-                             ->withErrors('image');
-        }
+            ->withInput()
+            ->withErrors('image');
+        }        
 
-        $this->imageHelper->adjustOrder($type, $order, $this->member, 'store');
+        //Getting the max permitted position
+        $maxPosition = Member::where('type', $type)->count() + 1;
+        
+        //If the admin informed a greater position, set the position as the maximum one
+        if($order > $maxPosition){
+            $order = $maxPosition;
+        } 
+        
+        //Adjust the order
+        $this->imageHelper->adjustStoreOrder($type, $order, $this->member);
 
         //Creating the new member
         $member = $this->member->create($request->all());
+        $member->order = $order;
 
         //Moves and sets the uploaded image
         $this->imageHelper->uploadImage($request, $member); 
@@ -135,7 +154,9 @@ class MembersController extends Controller
     public function edit($id)
     {
         $member = $this->member->find($id);
-        return view('admin.member.edit', compact('member'));
+        $action = 'update';
+
+        return view('admin.member.edit', compact('member', 'action'));
     }
 
     /**
@@ -146,14 +167,14 @@ class MembersController extends Controller
      */
     public function update($id, MemberRequest $request)
     {
-        //If the order of this image have already been used,
-        //move the order of others images one step forward
+        $member = Member::find($id);
+        $oldOrder = $member->order;
+        $newOrder = $request->input('order');
         $type = $request->input('type');
-        $order = $request->input('order');
 
         /* 
-            Laravel can not handle using the request manager the validation
-            of the size image that exceeds the configuration of php.in
+        Laravel can not handle using the request manager the validation
+        of the size image that exceeds the configuration of php.in
         */
         if($this->imageHelper->fileImageSizeExceeded($request->file('image'))){
             //Set the message and the error class
@@ -161,18 +182,22 @@ class MembersController extends Controller
             Session::flash('alert-class', 'alert-danger');
 
             return redirect()->back();
-        }
-
-        //Find the member
-        $member = $this->member->find($id);
-       
-        //If the admin changed the member order, so it is necessary adjust the others members.
-        if($member->order != $request->input('order')){
-            $this->imageHelper->adjustOrder($type, $order, $this->member, 'update');
-        }
+        }  
 
         //Fill this member with the new form information
-        $member->fill($request->all());        
+        $member->fill($request->all()); 
+        
+        //Getting the max permitted position
+        $maxPosition = Member::where('type', $type)->count();
+
+        //If the admin informed a greater position, set the position as the maximum one
+        if($member->order > $maxPosition){
+            $member->order = $maxPosition;
+            $newOrder = $maxPosition;
+        }
+
+        //Setting the right order 
+        $this->imageHelper->adjustUpdateOrder($type, $oldOrder, $newOrder, $member);        
         
         //Checking if there was uploaded a image
         if ($request->file('image') != null) {
@@ -185,7 +210,6 @@ class MembersController extends Controller
         }        
         
         $member->save();
-
 
         //Sending the user to the accounts page
         return redirect()->route('member/index');
@@ -202,7 +226,7 @@ class MembersController extends Controller
         $member = $this->member->find($id);
 
         //Adjust the order of the members when delete this .
-        $this->imageHelper->adjustOrder($member->type, $member->order, $member, 'destroy');
+        $this->imageHelper->adjustDestroyOrder($member->type, $member->order, $member);
 
         //Delete the member image on the filesystem
         File::delete($member->path);
@@ -212,5 +236,5 @@ class MembersController extends Controller
         
         //Sending the user to the accounts page
         return redirect()->route('member/index');
-    }    
+    }
 }

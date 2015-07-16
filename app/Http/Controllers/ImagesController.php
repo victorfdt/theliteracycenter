@@ -54,7 +54,9 @@ class ImagesController extends Controller
     public function create()
     {
         $image = $this->image;
-        return view('admin.image.create', compact('image'));
+        $action = 'create';
+
+        return view('admin.image.create', compact('image', 'action'));
     }    
 
     /**
@@ -83,10 +85,20 @@ class ImagesController extends Controller
             ->withErrors('image');
         }
 
-        $this->imageHelper->adjustOrder($type, $order, $this->image, 'store');
+        //Getting the max permitted position
+        $maxPosition = Image::where('type', $type)->count() + 1;
+
+        //If the admin informed a greater position, set the position as the maximum one
+        if($order > $maxPosition){
+            $order = $maxPosition;
+        } 
+        
+        //Adjust the order
+        $this->imageHelper->adjustStoreOrder($type, $order, $this->image);
 
         //Creating the new image
-        $image = $this->image->create($request->all());        
+        $image = $this->image->create($request->all());
+        $image->order = $order;
         $image->active = true;
 
         //Moves and sets the uploaded image
@@ -119,7 +131,9 @@ class ImagesController extends Controller
     public function edit($id)
     {
         $image = $this->image->find($id);
-        return view('admin.image.edit', compact('image'));
+        $action = 'update';
+
+        return view('admin.image.edit', compact('image', 'action'));
     }
 
     /**
@@ -130,10 +144,11 @@ class ImagesController extends Controller
      */
     public function update($id, ImageRequest $request)
     {
-        //If the order of this image have already been used,
-        //move the order of others images one step forward
+        //Find the image
+        $image = Image::find($id);
+        $oldOrder = $image->order;
+        $newOrder = $request->input('order');
         $type = $request->input('type');
-        $order = $request->input('order');
 
         /* 
         Laravel can not handle using the request manager the validation
@@ -147,26 +162,29 @@ class ImagesController extends Controller
             return redirect()->back();
         }
 
-        //Find the image
-        $image = $this->image->find($id);
-
-        //If the admin changed the member order, so it is necessary adjust the others members.
-        if($image->order != $request->input('order')){
-            $this->imageHelper->adjustOrder($type, $order, $this->image, 'update');
-        }
-
-        //Fill the image with the new form fields
+        //Fill this image with the new form information
         $image->fill($request->all());
-        
+
+        //Getting the max permitted position
+        $maxPosition = Image::where('type', $type)->count();
+
+        //If the admin informed a greater position, set the position as the maximum one
+        if($image->order > $maxPosition){
+            $image->order = $maxPosition;
+            $newOrder = $maxPosition;
+        }
+            //Setting the right order 
+        $this->imageHelper->adjustUpdateOrder($type, $oldOrder, $newOrder, $image);        
+
         //Checking if there was uploaded a image
         if ($request->file('image') != null) {
 
-            //Delete the old image from the filesystem
+            //Delete the old image image from the filesystem
             File::delete($image->path);
 
             //Moves and sets the new uploaded image
-            $this->imageHelper->uploadImage($request, $image);          
-        }        
+            $this->imageHelper->uploadImage($request, $image);            
+        }            
         
         $image->save();
 
@@ -182,8 +200,7 @@ class ImagesController extends Controller
      */
     public function destroy($id)
     {
-
-        $image = $this->image->find($id);
+       $image = $this->image->find($id);
 
         //Must be always at least one activate image of each type     
         if($image->where('type', $image->type)->where('active', true)->count() == 1){
@@ -195,7 +212,7 @@ class ImagesController extends Controller
         } else {
 
             //Adjust the order of the images when delete this oe.
-            $this->imageHelper->adjustOrder($image->type, $image->order, $image, 'destroy');
+            $this->imageHelper->adjustDestroyOrder($image->type, $image->order, $image);
 
             //Delete the image on the filesystem
             File::delete($image->path);
@@ -212,8 +229,8 @@ class ImagesController extends Controller
     Changes the status of the image
     */
     public function changeStatus($id){
-        $image = $this->image->find($id);
 
+        $image = $this->image->find($id);
 
         //Checking if there is only one active image of the image type.
         if($image->where('type', $image->type)->where('active', true)->where('id', $image->id)->count() == 1){

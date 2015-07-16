@@ -16,20 +16,29 @@
 </div>
 
 <!-- TYPE -->
-<div class="form-group {{ $errors->has('type') ? 'has-error' : ''}} ">
-  <label for="role" class="col-sm-2 control-label">Type</label>
-  <div class="col-sm-5">
-    <!-- In the way that this form is used on the create and on the update page,
-     It is necessary check is the $user variable is setted.
-     The input Input::old load the selected value on the update page
-   -->       
-   {!! Form::select('type', array($member::STAFF => 'Staff', 
-   $member::BOARD_DIRECTOR => 'Board of Director'), 
-   Input::old('type', $member->type), ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}       
+  <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}} ">
+    <label for="role" class="col-sm-2 control-label">Type</label>
+    <div class="col-sm-5">
+      <!-- In the way that this form is used on the create and on the update page,
+       It is necessary check is the $user variable is setted.
+       The input Input::old load the selected value on the update page
+     -->       
+     {!! Form::select('type', array($member::STAFF => 'Staff', 
+                                    $member::BOARD_DIRECTOR => 'Board of Director'), 
+     Input::old('type', $member->type), ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!} 
+     {!! $errors->first('type', '<span class="help-block">:message</span>') !!}
 
-   {!! $errors->first('type', '<span class="help-block">:message</span>') !!}   
- </div>
-</div>
+
+      <!-- If there is a update page, I must put a hidden field of type.
+           Because the jquery will disable the input select, and the only
+           way to keep the information on the request, is create this hidden input. 
+      -->
+      @if($action == 'update')
+        {!! Form::hidden('type') !!}
+      @endif
+   </div>
+  </div>
+
 
 <!-- EMAIL -->
 <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}} " id ="email">
@@ -70,7 +79,7 @@
 <!-- EXHIBITION ORDER -->
 <div class="form-group {{ $errors->has('order') ? 'has-error' : ''}} ">
   <label for="order" class="col-sm-2 control-label">Exhibition order</label>
-  <div class="col-sm-5">   
+  <div class="col-sm-5">
     {!! Form::text('order', null, ['class' => 'form-control']) !!}
     {!! $errors->first('order', '<span class="help-block">:message</span>') !!}
   </div>
@@ -93,6 +102,7 @@
   </div>
 </div>
 
+{!! Form::hidden('action', $action, array('id' => 'action')) !!}
 <script>
 $(document).ready(function(){    
 
@@ -113,6 +123,11 @@ $(document).ready(function(){
 
   /*Phone formatter*/
   $('#input_phone').mask('(000) 000-0000');
+
+  //Checking if is update page to disable the type
+  if($('#action').val() == 'update'){
+    $("#type").prop( "disabled", true );
+  }
 
 });
 
