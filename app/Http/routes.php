@@ -69,6 +69,18 @@ get('member/create', array('as' => 'member/create', 'uses' => 'MembersController
 get('about/staff', array('as' => 'about/staff', 'uses' => 'MembersController@staff'));
 get('about/boardofdirectors', array('as' => 'about/boardofdirector', 'uses' => 'MembersController@boardOfdirector'));
 
+/** WISHLIST */
+get('wishlist/edit/{id}', array('as' => 'wishlist/edit', 'uses' => 'WishListController@edit'));
+post('wishlist/store', array('as' => 'wishlist/store', 'uses' => 'WishListController@store'));
+patch('wishlist/update/{id}', array('as' => 'wishlist/update', 'uses' => 'WishListController@update'));
+get('wishlist/destroy/{id}', array('as' => 'wishlist/destroy', 'uses' => 'WishListController@destroy'));
+get('wishlist/index', array('as' => 'wishlist/index', 'uses' => 'WishListController@index'));
+get('wishlist/edit', array('as' => 'wishlist/edit', 'uses' => 'WishListController@edit'));
+get('wishlist/create', array('as' => 'wishlist/create', 'uses' => 'WishListController@create'));
+get('donate/wishlist', array('as' => 'donate/wishlist', 'uses' => 'WishListController@displayWishList'));
+get('wishlist/status/{id}', array('as' => 'wishlist/status', 'uses' => 'WishListController@changeStatus'));
+
+
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
 Route::get('/', 'PagesController@index');

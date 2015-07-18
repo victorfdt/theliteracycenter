@@ -31,6 +31,11 @@
          </ul>
       </li> 
 
+      <!-- Wish List -->
+      <li>
+         {!! link_to_route('wishlist/index', 'Wish List') !!}
+      </li>
+
       <!-- Accounts -->
       <li>
          {!! link_to_route('users.index', 'User') !!}
