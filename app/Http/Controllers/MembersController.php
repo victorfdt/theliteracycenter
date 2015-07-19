@@ -22,12 +22,9 @@ class MembersController extends Controller
     private $imageHelper;
 
     public function __construct()
-    {
-        //See if the there is an authenticated user
-        $this->middleware('auth');
-
+    {        
         //Check if this user is a admin
-        $this->middleware('admin');
+        $this->middleware('admin', ['except' => ['staff', 'boardOfdirector']]);
 
         $this->member = new Member();
 

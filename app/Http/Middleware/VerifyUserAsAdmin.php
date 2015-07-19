@@ -20,7 +20,7 @@ class VerifyUserAsAdmin
        # $userId = $request->user()->id;
         #$user = App\User::find($userId);
 
-        if(!$request->user()->isAdmin()){
+        if($request->user() == null || !$request->user()->isAdmin()){
             return redirect('/');
         }
 

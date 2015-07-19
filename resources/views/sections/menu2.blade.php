@@ -21,7 +21,7 @@
                <a href="{{ url('/donate/contribution') }}">Contribution</a>
             </li>
             <li>               
-               <a href="{{ url('/donate/wishlist') }}">Wishlist</a>
+               <a href="{{ url('/donate/wishlist') }}">Wish list</a>
             </li>  
          </ul>
       </li>
