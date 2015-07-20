@@ -80,6 +80,17 @@ get('wishlist/create', array('as' => 'wishlist/create', 'uses' => 'WishListContr
 get('donate/wishlist', array('as' => 'donate/wishlist', 'uses' => 'WishListController@displayWishList'));
 get('wishlist/status/{id}', array('as' => 'wishlist/status', 'uses' => 'WishListController@changeStatus'));
 
+/** JOB OPPORTUNITIES */
+get('job/edit/{id}', array('as' => 'job/edit', 'uses' => 'JobOpportunitiesController@edit'));
+post('job/store', array('as' => 'job/store', 'uses' => 'JobOpportunitiesController@store'));
+patch('job/update/{id}', array('as' => 'job/update', 'uses' => 'JobOpportunitiesController@update'));
+get('job/destroy/{id}', array('as' => 'job/destroy', 'uses' => 'JobOpportunitiesController@destroy'));
+get('job/index', array('as' => 'job/index', 'uses' => 'JobOpportunitiesController@index'));
+get('job/edit', array('as' => 'job/edit', 'uses' => 'JobOpportunitiesController@edit'));
+get('job/create', array('as' => 'job/create', 'uses' => 'JobOpportunitiesController@create'));
+get('job/status/{id}', array('as' => 'job/status', 'uses' => 'JobOpportunitiesController@changeStatus'));
+get('job/show/{id}', array('as' => 'job/show', 'uses' => 'JobOpportunitiesController@show'));
+get('about/jobOpportunities', array('as' => 'about/jobOpportunities', 'uses' => 'JobOpportunitiesController@jobDisplay'));
 
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);

@@ -66,7 +66,7 @@ $(document).ready(function(){
 
 		if(isItemSelected()){			
 			//Changing the information on modal
-			$("#modalHeader").text("Statu of the  "+ element);
+			$("#modalHeader").text("Status of the  "+ element);
 			$("#modalContent").text("Changing the status of the image "+ element +" operation.");
 
 			//Setting the delete button with the selected user id		

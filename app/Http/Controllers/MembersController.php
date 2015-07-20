@@ -127,7 +127,7 @@ class MembersController extends Controller
         //Saving
         $member->save();
 
-        //Sending the user to the accounts page
+        //Sending the user to the member page
         return redirect()->route('member/index');
     }
 

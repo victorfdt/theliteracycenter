@@ -8,7 +8,7 @@
 <br><br>
 
 @foreach($members as $member)
-	@include('pages.about._formDisplay')
+	@include('pages.about._displayMembers')
 @endforeach
 
 @stop

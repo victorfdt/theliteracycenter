@@ -124,22 +124,7 @@
 <script>
 $(document).ready(function(){    
 
-  /* Only these main page and side bar type can add order */
-  if($("#type").val() == 1 || $("#type").val() == 3){
-    $("#order").show();
-  } else {
-    $("#order").hide();
-  }
-
-  $("#type").change(function(){
-    if($("#type").val() == 1 || $("#type").val() == 3){
-      $("#order").show();
-    } else {
-      $("#order").hide();
-    }
-  });
-
-  /*Phone formatter*/
+   /*Phone formatter*/
   $('#input_phone').mask('(000) 000-0000');
 
   //Checking if is update page to disable the type

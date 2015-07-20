@@ -7,16 +7,20 @@
       <!-- Layout -->   
       <li class='has-sub'><a href='#'><span>Layout</span></a>
          <ul>
-            <li class='has-sub'><a href='#'><span>Index</span></a>
-               <ul>
-                  <li>
-
-                  </li>
-                  <li><a href='#'><span>Content</span></a></li>                  
-               </ul>
+            <li>
+               <a href='#'><span>Index</span></a>               
             </li>
             <li>
                {!! link_to_route('image/index', 'Images') !!}
+            </li>
+            <li>
+               {!! link_to_route('wishlist/index', 'Wish List') !!}
+            </li>
+            <li>
+               {!! link_to_route('member/index', 'Member') !!}
+            </li>
+            <li>
+               {!! link_to_route('job/index', 'Job Opportunities') !!}
             </li>
          </ul>
       </li>
@@ -29,23 +33,13 @@
             <li><a href='#'><span>Form</span></a></li>
 
          </ul>
-      </li> 
-
-      <!-- Wish List -->
-      <li>
-         {!! link_to_route('wishlist/index', 'Wish List') !!}
-      </li>
+      </li>      
 
       <!-- Accounts -->
       <li>
          {!! link_to_route('users.index', 'User') !!}
       </li>
-
-      <!-- Members -->
-      <li>
-         {!! link_to_route('member/index', 'Member') !!}
-      </li>
-
+      
       <!-- Files -->
       <li class='has-sub'><a href='#'><span>Files</span></a>   
          <li class='last'><a href='#'><span>Newletters</span></a></li>         

@@ -59,7 +59,11 @@
 
             <li>               
                <a href="{{ url('/about/boardofdirectors') }}">Board of directors</a>
-            </li>                     
+            </li>
+
+            <li> 
+               {!! link_to_route('about/jobOpportunities', 'Job Opportunities') !!} 
+            </li>                      
          </ul>
       </li>
       <li><a href='http://www.litcenter.org/'><span>Blog</span></a></li>

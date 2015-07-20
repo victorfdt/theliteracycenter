@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-     //Constants member's type
+    //Constants member's type
 	const STAFF = 1;
 	const BOARD_DIRECTOR = 2;
 
