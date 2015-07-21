@@ -40,13 +40,8 @@ get('admin', array('as' => 'admin', 'uses' => 'AdminController@index'));
 get('admin/password/edit', array('as' => 'admin/password/edit', 'uses' => 'AdminController@passwordEdit'));
 patch('admin/password/update', array('as' => 'admin/password/update', 'uses' => 'AdminController@passwordUpdate'));
 
-/** BANNER */
-get('banners/edit/{id}', array('as' => 'banners/edit', 'uses' => 'BannersController@edit'));
-post('banners/store', array('as' => 'banners/store', 'uses' => 'BannersController@store'));
-patch('banners/update/{id}', array('as' => 'banners/update', 'uses' => 'BannersController@update'));
-get('banners/destroy/{id}', array('as' => 'banners/destroy', 'uses' => 'BannersController@destroy'));
-get('banners/status/{id}', array('as' => 'banners/status', 'uses' => 'BannersController@changeStatus'));
-$router->resource('banners', 'BannersController');
+/** VOLUNTEER */
+get('volunteer', array('as' => 'volunteer', 'uses' => 'VolunteerController@index'));
 
 /** IMAGE */
 get('image/edit/{id}', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));

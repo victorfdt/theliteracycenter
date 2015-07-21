@@ -145,10 +145,10 @@ class UsersController extends Controller
     }
 
     /** Changes user passord */
-     public function passwordUpdate(ChangePasswordRequest $request){
+     public function passwordReset(ChangePasswordRequest $request, $id){
 
-        $user = Auth::user();
-        $user->password = bcrypt($request->password);
+        $this->user->find($id);
+        $user->password = bcrypt($newUser->name . 'litcenter');
         $user->save();
 
         //Sending the user to the accounts page

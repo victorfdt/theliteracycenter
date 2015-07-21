@@ -5,43 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Requests\UserRequest; 
-use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Controllers\Controller;
 
-
-use App\User;
-use App\Role;
-use Auth;
-
-class AdminController extends Controller
+class MonthlyReportController extends Controller
 {
-
-    private $user;
-
-    public function __construct()
-    {     
-        //Check if this user is a admin
-        $this->middleware('admin');
-
-        $this->user = new User();
-    }
-
-
-    public function passwordEdit(){
-        return view('admin.edit_password', compact('user'));        
-    }
-
-    public function passwordUpdate(ChangePasswordRequest $request){
-
-        $user = Auth::user();
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        //Sending the user to the accounts page
-        return redirect()->route('admin');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.home');
+        //
     }
 
     /**
@@ -114,5 +81,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-    }    
+    }
 }

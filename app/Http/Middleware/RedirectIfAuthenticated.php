@@ -37,9 +37,11 @@ class RedirectIfAuthenticated
     {   
 
         if ($this->auth->check()) {            
-           if($request->user()->isAdmin() == Role::ADMIN){
+            if($request->user()->isAdmin()){
                 return redirect('/admin');
-           } else {                
+            } else if($request->user()->isVolunteer()){
+                return redirect('/volunteer');
+            } else {
                 return redirect('/');
             }
         }

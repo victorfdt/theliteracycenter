@@ -58,4 +58,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return $condition;
     }
+
+    /* 
+        Verify if the user is a volunteer
+    */
+    public function isVolunteer()
+    {
+        $condition = false;
+
+        //Checking if the user is administrator
+        if($this->role->privilege == Role::VOLUNTEER){           
+           $condition = true;
+        }         
+
+        return $condition;
+    }
 }
