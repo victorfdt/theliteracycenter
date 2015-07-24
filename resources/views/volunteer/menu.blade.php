@@ -8,7 +8,7 @@
       <li class='has-sub'><a href='#'><span>Report</span></a>
          <ul>
             <li>
-               {!! link_to_route('image/index', 'Monthly tutoting report') !!}
+               {!! link_to_route('monthlyreport/index', 'Monthly tutoting report') !!}
             </li>            
          </ul>
       </li>

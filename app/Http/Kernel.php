@@ -31,5 +31,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'admin' => \App\Http\Middleware\VerifyUserAsAdmin::class,
         'volunteer' => \App\Http\Middleware\VerifyUserAsVolunteer::class,
+        'monthlyreport' => \App\Http\Middleware\MonthlyReport::class,
     ];
 }

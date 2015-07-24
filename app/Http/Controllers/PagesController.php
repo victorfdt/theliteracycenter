@@ -24,7 +24,7 @@ class PagesController extends Controller
         );
 
     private $volunteerPages = array(
-        'tutor'   => 'pages.volunteer.tutor',
+        'tutor'                             => 'pages.volunteer.tutor',
         'becomeavolunteer'                  => 'pages.volunteer.becomeavolunteer',
         'linkandfile'                       => 'pages.volunteer.linkandfile',
         'tutoringlocation'                  => 'pages.volunteer.tutoringlocation',

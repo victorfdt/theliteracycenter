@@ -44,6 +44,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+    public function monthlyReport(){
+        return $this->hasMany('App\MonthlyReport');
+    }
+
     /* 
         Verify if the user is administrator
     */

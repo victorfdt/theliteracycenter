@@ -11,7 +11,7 @@ class Role extends Model
   	const VOLUNTEER = 2;
   	const USER = 3;
 
-	/**
+	   /**
      * The database table used by the model.
      *
      * @var string

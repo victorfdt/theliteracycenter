@@ -67,7 +67,7 @@ $(document).ready(function(){
 		if(isItemSelected()){			
 			//Changing the information on modal
 			$("#modalHeader").text("Status of the  "+ element);
-			$("#modalContent").text("Changing the status of the image "+ element +" operation.");
+			$("#modalContent").text("Changing the status of the "+ element +" operation.");
 
 			//Setting the delete button with the selected user id		
 			var pathButtonLink = statusPath + '/' + $('table input[type=radio]:checked').val();

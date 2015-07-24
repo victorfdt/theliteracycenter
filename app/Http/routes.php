@@ -35,13 +35,13 @@ patch('users/update/{id}', array('as' => 'users/update', 'uses' => 'UsersControl
 get('users/destroy/{id}', array('as' => 'users/destroy', 'uses' => 'UsersController@destroy'));
 $router->resource('users', 'UsersController');
 
+
+/** ################ ADMIN SECTION ################ */
+
 /** ADMIN */
 get('admin', array('as' => 'admin', 'uses' => 'AdminController@index'));
 get('admin/password/edit', array('as' => 'admin/password/edit', 'uses' => 'AdminController@passwordEdit'));
 patch('admin/password/update', array('as' => 'admin/password/update', 'uses' => 'AdminController@passwordUpdate'));
-
-/** VOLUNTEER */
-get('volunteer', array('as' => 'volunteer', 'uses' => 'VolunteerController@index'));
 
 /** IMAGE */
 get('image/edit/{id}', array('as' => 'image/edit', 'uses' => 'ImagesController@edit'));
@@ -87,6 +87,23 @@ get('job/status/{id}', array('as' => 'job/status', 'uses' => 'JobOpportunitiesCo
 get('job/show/{id}', array('as' => 'job/show', 'uses' => 'JobOpportunitiesController@show'));
 get('about/jobOpportunities', array('as' => 'about/jobOpportunities', 'uses' => 'JobOpportunitiesController@jobDisplay'));
 
+/** ################ VOLUNTEER SECTION ################ */
+
+/** VOLUNTEER */
+get('volunteer', array('as' => 'volunteer', 'uses' => 'VolunteerController@index'));
+
+/** MONTHLY REPORT */
+get('monthlyreport/edit/{id}', array('as' => 'monthlyreport/edit', 'uses' => 'MonthlyReportController@edit'));
+post('monthlyreport/store', array('as' => 'monthlyreport/store', 'uses' => 'MonthlyReportController@store'));
+patch('monthlyreport/update/{id}', array('as' => 'monthlyreport/update', 'uses' => 'MonthlyReportController@update'));
+get('monthlyreport/destroy/{id}', array('as' => 'monthlyreport/destroy', 'uses' => 'MonthlyReportController@destroy'));
+get('monthlyreport/index', array('as' => 'monthlyreport/index', 'uses' => 'MonthlyReportController@index'));
+get('monthlyreport/edit', array('as' => 'monthlyreport/edit', 'uses' => 'MonthlyReportController@edit'));
+get('monthlyreport/create', array('as' => 'monthlyreport/create', 'uses' => 'MonthlyReportController@create'));
+get('monthlyreport/show/{id}', array('as' => 'monthlyreport/show', 'uses' => 'MonthlyReportController@show'));
+get('monthlyreport/status/{id}', array('as' => 'monthlyreport/status', 'uses' => 'MonthlyReportController@changeStatus'));
+
+/** ################ PAGES SECTION ################ */
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
 Route::get('/', 'PagesController@index');

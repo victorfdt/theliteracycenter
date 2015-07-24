@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\MonthlyReport;
 
 class MonthlyReportRequest extends Request
 {
@@ -13,7 +14,7 @@ class MonthlyReportRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,42 @@ class MonthlyReportRequest extends Request
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        //This id is passed by the controller that calls the request class
+        $report = MonthlyReport::find($this->id);
+
+        switch($this->method())
+        {
+            case 'GET':
+            case 'DELETE':
+            {
+                return [];
+            }
+            case 'POST':
+            {
+                return [
+                    'learner_name'      =>  'required',
+                    'site'              =>  'required',
+                    'total_prep_time'   =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_mileage'     =>  'required|numeric',                    
+                    'goals_progress'    =>  'required',
+                ];
+            }
+            case 'PUT':
+            case 'PATCH':
+            {
+                return [
+                    'learner_name'      =>  'required',
+                    'site'              =>  'required',
+                    'total_prep_time'   =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_mileage'     =>  'required|numeric',                    
+                    'goals_progress'    =>  'required',
+                ];
+            }
+            default:break;
+        }
     }
 }
