@@ -7,7 +7,7 @@ $(document).ready(function(){
 		//Checking if there is a user selected
 		if($('table input[type=radio]:checked').length <= 0){
 			//Changing the information on modal
-			$("#modalHeader").text("Select an " + element);
+			$("#modalHeader").text("Select one " + element);
 			$("#modalContent").text("You have to select an " + element);
 			$("#confirmButton").hide();
 			//Show the modal div

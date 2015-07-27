@@ -18,7 +18,7 @@ class Session extends Model
      *s
      * @var array
      */
-    protected $fillable = ['day', 'hours'];
+    protected $fillable = ['day', 'hours', 'student_present'];
 
     public function monthlyReport(){
       return $this->belongsTo('App\MonthlyReport');

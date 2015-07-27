@@ -40,6 +40,7 @@ class MonthlyReportController extends Controller
             //Find the reports
             $reports = MonthlyReport::orderBy('status', 'asc')
             ->orderBy('month', 'desc')
+            ->orderBy('year', 'desc')
             ->orderBy('user_id', 'asc')->get();
 
         } else {
@@ -72,19 +73,24 @@ class MonthlyReportController extends Controller
      * @return Response
      */
     public function store(MonthlyReportRequest $request)
-    {
-        //Creating the new monthly report
+    {      
+        //Creating the new report
         $report = $this->report->create($request->all());
 
-        //Creating the new sessions        
-        $sessionsIds = array();
-        foreach ($request->input('new', array()) as $id => $sessionData)
-        {           
-            $session = new Session;
-            $session->fill($sessionData);
-            $session->monthly_report_id = $report->id;
-            $session->save();
-        }       
+        //If the student is absent, it is not necessary create the sessions
+        if($report->student_present == true ){
+
+            //Creating the new sessions        
+            $sessionsIds = array();
+            foreach ($request->input('new', array()) as $id => $sessionData)
+            {           
+                $session = new Session;
+                $session->fill($sessionData);
+                $session->monthly_report_id = $report->id;
+                $session->save();
+            }
+        }
+        
 
         //Sending the user to the monthly report
         return redirect()->route('monthlyreport/index');
@@ -127,40 +133,58 @@ class MonthlyReportController extends Controller
     public function update(MonthlyReportRequest $request, $id)
     {
         //Find report
-        $report = MonthlyReport::find($id);        
+        $report = MonthlyReport::find($id);   
 
-        //##Updating the old sessions
-        $sessionsIds = array();
-        foreach ($request->input('old', array()) as $id => $sessionData)
-        {           
-            $session = Session::find($id) ?: new Session;
-            $session->fill($sessionData);
-            $session->save();
-            $sessionsIds[] = $session->id;
+        //Getting all the information of the form, expect the user id,
+        //due to keep the report related with its creator
+        $report->fill($request->except('user_id'));
+
+        $report->save();     
+
+        //If the student is absent, it is not necessary create the sessions
+        if($report->student_present == true ){
+
+            //##Updating the old sessions
+            $sessionsIds = array();
+            foreach ($request->input('old', array()) as $id => $sessionData)
+            {           
+                $session = Session::find($id) ?: new Session;
+                $session->fill($sessionData);
+                $session->save();
+                $sessionsIds[] = $session->id;
+            }
+
+            //##Delete the unused sessions
+            //Getting all sessions ids  
+            $sessionsToRemove = array();      
+            foreach ($report->sessions()->get() as $session) {
+                $sessionsToRemove[] = $session->id;
+            }
+
+            //The ids that are different from sessionsIds, must be deleted
+            $sessionsToRemove = array_diff($sessionsToRemove, $sessionsIds);
+            foreach ($sessionsToRemove as $id) {
+                Session::find($id)->delete();
+            }
+
+            //##Inserting new sessions        
+            //Creating the new sessions        
+            $sessionsIds = array();
+            foreach ($request->input('new', array()) as $id => $sessionData)
+            {           
+                $session = new Session;
+                $session->fill($sessionData);
+                $session->monthly_report_id = $report->id;
+                $session->save();
+            }  
+
+        } else {
+            //If the student is absent, delete all recorded sessions
+            foreach ($report->sessions()->get() as $session) {
+                $session->delete();
+            }
+
         }
-
-        //##Delete the unused sessions
-        //Getting all sessions ids        
-        foreach ($report->sessions() as $session) {
-            $sessionsToRemove[] = $session->id;
-        }
-
-        //The ids that are different from sessionsIds, must be deleted
-        $sessionsToRemove = array_diff($sessionsToRemove, $sessionsIds);
-        foreach ($sessionsToRemove as $id) {
-            Session::find($id)->delete();
-        }
-
-        //##Inserting new sessions        
-        //Creating the new sessions        
-        $sessionsIds = array();
-        foreach ($request->input('new', array()) as $id => $sessionData)
-        {           
-            $session = new Session;
-            $session->fill($sessionData);
-            $session->monthly_report_id = $report->id;
-            $session->save();
-        }  
 
         //Sending the user to the monthly report
         return redirect()->route('monthlyreport/index');
@@ -186,17 +210,17 @@ class MonthlyReportController extends Controller
     /*
         Change the status of the report as Read/OLD
     */
-    public function changeStatus($id){
+        public function changeStatus($id){
 
         //Find the report
-        $report = MonthlyReport::find($id);
+            $report = MonthlyReport::find($id);
 
-        $report->status = MonthlyReport::OLD;
-        $report->save();
+            $report->status = MonthlyReport::OLD;
+            $report->save();
 
         //Sending the user to the monthly report
-        return redirect()->route('monthlyreport/index');
-    }
+            return redirect()->route('monthlyreport/index');
+        }
 
-   
-}
+
+    }

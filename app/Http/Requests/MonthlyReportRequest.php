@@ -27,6 +27,23 @@ class MonthlyReportRequest extends Request
         //This id is passed by the controller that calls the request class
         $report = MonthlyReport::find($this->id);
 
+        $requiredInputs = [
+                    'learner_name'      =>  'required',
+                    'site'              =>  'required',
+                    'year'              =>  'required|numeric|min:4',
+                    'total_prep_time'   =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_travel_time' =>  'required|numeric',
+                    'total_mileage'     =>  'required|numeric',                    
+                    'goals_progress'    =>  'required',
+                ];
+
+        //Required inputs when the student is absent all the month
+        $requiredInputsNoStudent = [
+            'learner_name'      =>  'required',
+            'year'              =>  'required|numeric|min:4',
+        ];
+
         switch($this->method())
         {
             case 'GET':
@@ -35,29 +52,25 @@ class MonthlyReportRequest extends Request
                 return [];
             }
             case 'POST':
-            {
-                return [
-                    'learner_name'      =>  'required',
-                    'site'              =>  'required',
-                    'total_prep_time'   =>  'required|numeric',
-                    'total_travel_time' =>  'required|numeric',
-                    'total_travel_time' =>  'required|numeric',
-                    'total_mileage'     =>  'required|numeric',                    
-                    'goals_progress'    =>  'required',
-                ];
+            {   
+                $fields = $requiredInputs;
+
+                if($this->input('student_present') == false){
+                    $fields = $requiredInputsNoStudent;
+                }
+
+                return $fields;
             }
             case 'PUT':
             case 'PATCH':
             {
-                return [
-                    'learner_name'      =>  'required',
-                    'site'              =>  'required',
-                    'total_prep_time'   =>  'required|numeric',
-                    'total_travel_time' =>  'required|numeric',
-                    'total_travel_time' =>  'required|numeric',
-                    'total_mileage'     =>  'required|numeric',                    
-                    'goals_progress'    =>  'required',
-                ];
+                $fields = $requiredInputs;
+
+                if($this->input('student_present') == false){
+                    $fields = $requiredInputsNoStudent;
+                }
+
+                return $fields;
             }
             default:break;
         }

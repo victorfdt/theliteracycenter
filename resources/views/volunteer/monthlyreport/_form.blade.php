@@ -1,6 +1,16 @@
 <!-- TUTOR/USER ID -->
 {!! Form::hidden('user_id', $userId) !!}
 
+<!-- STUDENT PRESENT -->
+<div class="form-group {{ $errors->has('student_present') ? 'has-error' : ''}} ">
+  <label for="student_present" class="col-sm-2 control-label">Student present</label>
+  <div class="col-sm-5">      
+   {!! Form::select('student_present', array(true => 'Yes', false => 'No'), 
+   Input::old('student_present', $report->student_present), ['class' => 'form-control', 'id' => 'presentInput']); !!}
+   {!! $errors->first('student_present', '<span class="help-block">:message</span>') !!}
+ </div>
+</div>
+
 <!-- LEARNER NAME -->
 <div class="form-group {{ $errors->has('learner_name') ? 'has-error' : ''}} ">
   <label for="learner_name" class="col-sm-2 control-label">Learner name</label>
@@ -10,9 +20,19 @@
   </div>
 </div>
 
+<!-- YEAR -->
+<div class="form-group {{ $errors->has('year') ? 'has-error' : ''}} ">
+  <label for="year" class="col-sm-2 control-label">Year</label>
+  <div class="col-sm-5">
+
+   {!! Form::text('year',null, ['class' => 'form-control']) !!}
+   {!! $errors->first('year', '<span class="help-block">:message</span>') !!}
+ </div>
+</div>
+
 <!-- MONTH -->
 <div class="form-group {{ $errors->has('month') ? 'has-error' : ''}} ">
-  <label for="role" class="col-sm-2 control-label">Type</label>
+  <label for="month" class="col-sm-2 control-label">Month</label>
   <div class="col-sm-5">
 
    <!-- This input will be filled up by javascritp -->
@@ -61,30 +81,41 @@
 <!-- SESSIONS -->
 <div class="form-group">
   <label for="total_mileage" class="col-sm-2 control-label">Sessions</label>  
-  <div class="col-sm-3" id="sessionDays">
+  <div class="col-sm-5" id="sessionDays">
 
     <!-- If is greater than 0, it means that its a update page and it is necessary how de sessions
     of the selected report. -->
-    @if(sizeof($report->sessions()) > 0)
-    @foreach($report->sessions() as $session)
-    <div class="col-sm-5 session-input">
+    @if(sizeof($report->sessions()->get()) > 0)
+    @foreach($report->sessions()->get() as $session)
+    <div class="col-sm-3 session-input">
       {!! Form::text('old['.$session->id.'][day]', $session->day, 
       ['placeholder' => 'Day', 'class' => 'form-control']) !!}
     </div>
 
-    <div class="col-sm-5 session-input">
+    <div class="col-sm-3 session-input">
       {!! Form::text('old['.$session->id.'][hours]', $session->hours, 
       ['placeholder' => 'Hours', 'class' => 'form-control']) !!}
     </div>
+
+    <div class="col-sm-4 session-input">
+      {!! Form::select('old['.$session->id.'][present]', array(true => 'Yes', false => 'No'), 
+      Input::old('student_present', $session->student_present), ['class' => 'form-control']); !!}
+    </div>
+
+
     @endforeach
     @else
 
-    <div class="col-sm-5">
+    <div class="col-sm-3">
       {!! Form::text('new[0][day]',null,['placeholder' => 'Day', 'class' => 'form-control']) !!}      
     </div>
 
-    <div class="col-sm-5">      
+    <div class="col-sm-3">      
       {!! Form::text('new[0][hours]', null ,['placeholder' => 'Hours', 'class' => 'form-control']) !!}
+    </div>
+
+    <div class="col-sm-4"> 
+      {!! Form::select('new[0][student_present]', array(true => 'Yes', false => 'No'), null ,['class' => 'form-control']); !!}
     </div>
     @endif  
     
@@ -142,9 +173,9 @@
 </div>
 
 <script>
-  $(document).ready(function(){ 
+$(document).ready(function(){ 
 
-    //Represent the quantity of 
+    //Represent the quantity of session
     indexNewSession = 1;   
 
     /* Populating the monht select input */
@@ -157,15 +188,16 @@
 
     /* Add session*/    
     $('#addSession').click(function() {      
-      $("#sessionDays").append('<div class="col-sm-5 session-input"><input type="text" value="" name="new[' + indexNewSession + '][day]" class="form-control" placeholder="Day"></div>');
-      $("#sessionDays").append('<div class="col-sm-5 session-input"><input type="text" value="" name="new[' + indexNewSession + '][hours]" class="form-control" placeholder="Hours"></div>');
-
+      $("#sessionDays").append('<div class="col-sm-3 session-input"><input type="text" value="" name="new[' + indexNewSession + '][day]" class="form-control" placeholder="Day"></div>');
+      $("#sessionDays").append('<div class="col-sm-3 session-input"><input type="text" value="" name="new[' + indexNewSession + '][hours]" class="form-control" placeholder="Hours"></div>');
+      $("#sessionDays").append('<div class="col-sm-4 session-input"><select name="new[' + indexNewSession + '][student_present]" class="form-control"><option value="1">Yes</option><option value="0">No</option></select></div>');
       indexNewSession++;
     });
 
     /* Remove session*/ 
     $('#removeSession').click(function() {
-      if($("#sessionDays div").toArray().length > 2){
+      if($("#sessionDays div").toArray().length > 3){
+        $("#sessionDays div").last().remove();
         $("#sessionDays div").last().remove();
         $("#sessionDays div").last().remove();
         indexNewSession--;
@@ -174,54 +206,83 @@
     });
 
     $("#sessionDays input[name*='day']").keypress(function( $this ){
-        $(this).val($(this).val());
+      $(this).val($(this).val());
     });
 
+    /* ON CHANGE -  Disable all sessionDays input fields when student does not appear */
+    $("#presentInput").change(function(){
+      if($(this).val() == false){
+        $("#sessionDays :input").prop('disabled', true);
+        $('#addSession').prop('disabled', true);
+        $('#removeSession').prop('disabled', true);
+      } else {
+        $("#sessionDays :input").prop('disabled', false);
+        $('#addSession').prop('disabled', false);
+        $('#removeSession').prop('disabled', false);
+      }
+    });
+
+    /* ON LOAD - Disable all sessionDays input fields when student does not appear */
+    if($("#presentInput").val() == false){
+      if($(this).val() == false){
+        $("#sessionDays :input").prop('disabled', true);
+        $('#addSession').prop('disabled', true);
+        $('#removeSession').prop('disabled', true);
+      } else {
+        $("#sessionDays :input").prop('disabled', false);
+        $('#addSession').prop('disabled', false);
+        $('#removeSession').prop('disabled', false);
+      }
+    }
 
     /* Submit button.
     Making validation on the session fields
     */
-    $('#reportForm').submit(function(e) {      
+    $('#reportForm').submit(function(e) {
 
-      //Checking the quantity of days that were filled up
-      var qtdDays = 0;
-      var qtdDaysFilledUp = 0;
+      if($("#presentInput").val() == true){
+        //Checking the quantity of days that were filled up
+        var qtdDays = 0;
+        var qtdDaysFilledUp = 0;
+        $("#sessionDays input[name*='day']").each(function( index ) {         
+          qtdDays++;      
+          if($( this ).val() != ''){
+            qtdDaysFilledUp++
+          }      
+        });
 
-      $("#sessionDays input[name*='day']").each(function( index ) {         
-        qtdDays++;      
-        if($( this ).val() != ''){
-          qtdDaysFilledUp++
-        }      
-      });
+        var qtdHours = 0;
+        var qtdHoursFilledUp = 0;
 
-      var qtdHours = 0;
-      var qtdHoursFilledUp = 0;
-
-      $("#sessionDays input[name*='hours']").each(function( index ) {
-        qtdHours++;        
-        if($( this ).val() != ''){
-          qtdHoursFilledUp++
-        }      
-      });
-      
-      if(qtdDaysFilledUp == 0 || qtdHoursFilledUp == 0){
-        alert('You must filled up completly at least one session day.');
-
-        e.preventDefault(); //prevent default form submit
-      } else{
+        $("#sessionDays input[name*='hours']").each(function( index ) {
+          qtdHours++;        
+          if($( this ).val() != ''){
+            qtdHoursFilledUp++
+          }      
+        });
         
-        if(qtdDays != qtdDaysFilledUp || qtdHours != qtdHoursFilledUp){
-        alert('On the session section, there are empty fields! ');
-        e.preventDefault(); //prevent default form submit
+        if(qtdDaysFilledUp == 0 || qtdHoursFilledUp == 0){
+          alert('You must filled up completly at least one session day.');
 
-      } else {      
+          e.preventDefault(); //prevent default form submit
+        } else {
 
+          if(qtdDays != qtdDaysFilledUp || qtdHours != qtdHoursFilledUp){
+            alert('On the session section, there are empty fields! ');
+            e.preventDefault(); //prevent default form submit
+
+          } else {      
+
+              //Submit the form
+              $('#reportForm').submit();
+            }
+          } 
+        } else {
           //Submit the form
           $('#reportForm').submit();
         }
-      }      
 
-    }); 
+      }); 
 
-  });
+});
 </script>

@@ -26,7 +26,9 @@ Route::controllers([
 /** AUTHENTICATION */
 get('/login', 'Auth\AuthController@getLogin');
 get('/logout', 'Auth\AuthController@getLogout');
-get('/password', 'Auth\PasswordController@getEmail');
+get('editpassword', array('as' => 'editpassword', 'uses' => 'Auth\PasswordController@editPassword'));
+patch('/passwordupdate', array('as' => '/passwordupdate', 'uses' => 'Auth\PasswordController@updatePassword'));
+
 
 /** USERS */
 get('users/edit/{id}', array('as' => 'users/edit', 'uses' => 'UsersController@edit'));

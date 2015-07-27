@@ -38,14 +38,14 @@ class MonthlyReport extends Model
      */
     protected $fillable = ['learner_name', 'month', 'site', 'total_prep_time',
      'total_travel_time', 'total_mileage','goals_archieved', 
-     'goals_progress', 'material_used', 'comments', 'user_id'];   
+     'goals_progress', 'material_used', 'comments', 'user_id', 'year', 'student_present'];   
 
     public function user(){
     	return $this->belongsTo('App\User')->first();
     }
 
     public function sessions(){
-    	return $this->hasMany('App\Session')->get();
+    	return $this->hasMany('App\Session');
     }
 
     /** Returns the name of the month by the key*/

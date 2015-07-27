@@ -19,6 +19,10 @@
 			<tr>
 				<th></th>
 				<th>Month</th>
+				<th>Year</th>
+				@if($auth::user()->isAdmin())
+					<th>Tutor name</th>
+				@endif
 				<th>Learner name</th>		
 				<th>Status</th>		
 			</tr>
@@ -41,6 +45,14 @@
 				<!-- MONTH with link to show -->
 					<?php $monthName = $monthlyReport->getMonthName($report->month) ?>
 				<td>{!! HTML::linkRoute('monthlyreport/show', $monthName, [$report->id]) !!}</td>
+
+				<!-- YEAR -->
+				<td>{{ $report->year }}</td>
+
+				<!-- TUTOR NAME -->
+				@if($auth::user()->isAdmin())
+					<td>{{ $report->user()->name }}</td>
+				@endif
 
 				<!-- LEARNER NAME -->
 				<td>{{ $report->learner_name }}</td>

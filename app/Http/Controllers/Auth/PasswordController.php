@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Http\Requests\ChangePasswordRequest;
 
 use App\User;
 use Auth;
@@ -37,9 +38,8 @@ class PasswordController extends Controller
         $this->user = Auth::user();
     }
 
-    public function edit(){
+    public function editPassword(){
         $user = $this->user;
-        dd($user);
 
         return view('pages.edit_password', compact('user'));        
     }
@@ -47,6 +47,7 @@ class PasswordController extends Controller
     public function updatePassword(ChangePasswordRequest $request){
 
         $user = Auth::user();
+        dd($user);
         $user->password = bcrypt($request->password);
         $user->save();
 
