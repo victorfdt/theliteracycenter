@@ -6,8 +6,8 @@
 		<li>
 			<div class="media">
 				<div class="media-left">
-					<a href="#">
-						<img src="images/upload/image/default/general.jpg" class="img-rounded" alt="">
+					<a href="{{ url('/about/theliteracycenter') }}">
+						<img src="images/upload/image/default/general.jpg" class="img-rounded side-bar-media" alt="">
 					</a>
 				</div>
 				<div class="media-body">
@@ -18,8 +18,8 @@
 		<li>
 			<div class="media">
 				<div class="media-left">
-					<a href="#">
-						<img src="images/pics09.jpg" class="img-rounded" alt="">
+					<a href="{{ url('/about/staff') }}">
+						<img src="images/upload/image/default/staff.jpeg" class="img-rounded" alt="">
 					</a>
 				</div>
 				<div class="media-body">
@@ -30,8 +30,8 @@
 		<li>
 			<div class="media">
 				<div class="media-left">
-					<a href="#">
-						<img src="images/pics09.jpg" class="img-rounded" alt="">
+					<a href="{{ url('/donate/contribution') }}">
+						<img src="images/upload/image/default/pig_donate.jpg" class="img-rounded" alt="">
 					</a>
 				</div>
 				<div class="media-body">
@@ -42,8 +42,8 @@
 		<li>
 			<div class="media">
 				<div class="media-left">
-					<a href="#">
-						<img src="images/pics09.jpg" class="img-rounded" alt="">
+					<a href="{{ url('/event/calendar') }}">
+						<img src="images/upload/image/default/calendar.jpg" class="img-rounded" alt="">
 					</a>
 				</div>
 				<div class="media-body">

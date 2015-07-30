@@ -11,7 +11,7 @@
 			</div>
 
 			<div class="3u">
-				@include('pages.index_side_bar')
+				@include('sections.index_side_bar')
 			</div>
 		@endif
 		
