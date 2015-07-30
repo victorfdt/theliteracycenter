@@ -270,7 +270,7 @@
 			ul.style2 img
 			{
 				float: left;
-				padding-right: 1em;
+				width: 100px;
 			}
 			
 		ul.style5
@@ -876,6 +876,9 @@
 {
 	width: 233px;
 }
+
+/** Index page*/
+
 	
 /*********************************************************************************/
 /* Banner                                                                        */
@@ -935,6 +938,32 @@
 	{
 		border-top: 1px solid;
 		border-color: rgba(0,0,0,.2);
+	}
+
+	.post-image-center{
+		width: 500px;
+		margin-bottom: 2em;
+		display: block;
+    	margin-left: auto;
+    	margin-right: auto;
+	}
+
+	.post-image-right{
+		width: 500px;
+		margin-bottom: 2em;
+		display: block;
+		float: right;
+    	margin-left: 2em;
+    	margin-right: auto;
+	}
+
+	.post-image-left{
+		width: 500px;
+		margin-bottom: 2em;
+		display: block;
+		float: left;
+    	margin-left: auto;
+    	margin-right: 2em;
 	}
 	
 	

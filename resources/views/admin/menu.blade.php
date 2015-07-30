@@ -8,7 +8,7 @@
       <li class='has-sub'><a href='#'><span>Layout</span></a>
          <ul>
             <li>
-               <a href='#'><span>Index</span></a>               
+               {!! link_to_route('indexpage/index', 'Index') !!}            
             </li>
             <li>
                {!! link_to_route('image/index', 'Images') !!}

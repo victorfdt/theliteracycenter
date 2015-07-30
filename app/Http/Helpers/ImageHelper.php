@@ -8,8 +8,8 @@ class ImageHelper
     Gets the image uploaded from the form, and moves it to the directory.
     */
     public function uploadImage($request, $model){
-        //Getting the upload image
-        $imageName = $request->input('name') . '.' . $request->file('image')->getClientOriginalExtension();
+        //Getting the upload image (Symfony class UploadedFile)
+        $imageName = $model->id . '_' . $request->file('image')->getClientOriginalName();
 
         //Moving the image to the folder, and getting the path
         $request->file('image')->move(base_path() . '/public/' . $model::DIRECTORY, $imageName);
@@ -96,7 +96,7 @@ class ImageHelper
     */
     public function fileImageSizeExceeded($imageFile){
         $error = false;
-
+        
         if($imageFile != null){
             if($imageFile->getError() == 1 && $imageFile->getClientSize() == 0){
                 $error = true;
@@ -105,5 +105,7 @@ class ImageHelper
 
         return $error;
     }
+
+
 
 }

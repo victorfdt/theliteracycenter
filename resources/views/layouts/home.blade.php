@@ -37,7 +37,6 @@
 
 		@yield('content')
 
-
 	</div>
 	<!-- /Main -->
 

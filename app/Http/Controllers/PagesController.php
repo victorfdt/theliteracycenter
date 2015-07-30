@@ -11,8 +11,7 @@ class PagesController extends Controller
 {
 
     /* Arrays with the mapping of the pages */
-    private $pages = array(
-        'index'                             => 'pages.index',
+    private $pages = array(        
         'about'                             => 'pages.about',
         'donate'                            => 'pages.donate',
         );

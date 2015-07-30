@@ -101,9 +101,7 @@ class MembersController extends Controller
             Session::flash('message', 'The file image can not be greater than 2MB!'); 
             Session::flash('alert-class', 'alert-danger');
 
-            return redirect()->back()
-            ->withInput()
-            ->withErrors('image');
+            return redirect()->back()->withErrors('image');
         }        
 
         //Getting the max permitted position

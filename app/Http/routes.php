@@ -89,6 +89,19 @@ get('job/status/{id}', array('as' => 'job/status', 'uses' => 'JobOpportunitiesCo
 get('job/show/{id}', array('as' => 'job/show', 'uses' => 'JobOpportunitiesController@show'));
 get('about/jobOpportunities', array('as' => 'about/jobOpportunities', 'uses' => 'JobOpportunitiesController@jobDisplay'));
 
+/** INDEX PAGE */
+get('indexpage/edit/{id}', array('as' => 'indexpage/edit', 'uses' => 'IndexPageController@edit'));
+post('indexpage/store', array('as' => 'indexpage/store', 'uses' => 'IndexPageController@store'));
+patch('indexpage/update/{id}', array('as' => 'indexpage/update', 'uses' => 'IndexPageController@update'));
+get('indexpage/destroy/{id}', array('as' => 'indexpage/destroy', 'uses' => 'IndexPageController@destroy'));
+get('indexpage/index', array('as' => 'indexpage/index', 'uses' => 'IndexPageController@index'));
+get('indexpage/edit', array('as' => 'indexpage/edit', 'uses' => 'IndexPageController@edit'));
+get('indexpage/create', array('as' => 'indexpage/create', 'uses' => 'IndexPageController@create'));
+get('indexpage/show/{id}', array('as' => 'indexpage/show', 'uses' => 'IndexPageController@show'));
+get('indexpage/status/{id}', array('as' => 'indexpage/status', 'uses' => 'IndexPageController@changeStatus'));
+get('/', array('as' => '/', 'uses' => 'IndexPageController@displayPosts'));
+get('/index', array('as' => '/index', 'uses' => 'IndexPageController@displayPosts'));
+
 /** ################ VOLUNTEER SECTION ################ */
 
 /** VOLUNTEER */
@@ -108,6 +121,5 @@ get('monthlyreport/status/{id}', array('as' => 'monthlyreport/status', 'uses' =>
 /** ################ PAGES SECTION ################ */
 /** PAGES */
 $router->resource('pages', 'PagesController', ['except' => ['pages']]);
-Route::get('/', 'PagesController@index');
 Route::get('/{name}', 'PagesController@goToPage');
 Route::get('/{section}/{name}', 'PagesController@goToSectionPage');
