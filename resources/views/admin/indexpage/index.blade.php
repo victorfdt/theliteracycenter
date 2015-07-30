@@ -31,9 +31,9 @@
 				<!-- Status -->
 				<td>
 					@if ($post->status == $post::ONLINE)
-						{{'Online'}}
+						<span class="label label-info">{{'Online'}}</span>
 					@elseif ($post->status == $post::OFFLINE)
-						{{'Offline'}}					
+						<span class="label label-danger">{{'Offline'}}</span>					
 					@endif
 				</td>				
 			</tr>

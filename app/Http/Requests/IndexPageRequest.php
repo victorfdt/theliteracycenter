@@ -22,13 +22,7 @@ class IndexPageRequest extends Request
      * @return array
      */
     public function rules()
-    {        
-        $requiredInputs = [
-                    'title'         =>  'required',
-                    'content'       =>  'required',
-                    'image'         =>  'image|mimes:jpeg,bmp,png',                    
-                ];
-        
+    {              
 
         switch($this->method())
         {
@@ -39,12 +33,20 @@ class IndexPageRequest extends Request
             }
             case 'POST':
             {   
-                return $requiredInputs;
+                return [
+                    'title'         =>  'required',
+                    'content'       =>  'required',
+                    'image'         =>  'required|image|mimes:jpeg,bmp,png',                    
+                ];
             }
             case 'PUT':
             case 'PATCH':
             {
-                return $requiredInputs;
+                return [
+                    'title'         =>  'required',
+                    'content'       =>  'required',
+                    'image'         =>  'image|mimes:jpeg,bmp,png',                    
+                ];
             }
             default:break;
         }
