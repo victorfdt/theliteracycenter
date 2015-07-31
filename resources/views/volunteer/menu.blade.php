@@ -1,7 +1,7 @@
 <div id='cssmenu'>
    <ul>
       <li>
-         <a href='/volunteer' id='menu_home'><span>Home</span></a>
+         <a href='/volunteer'><span>Home</span></a>
       </li>   
 
       <!-- Layout -->   

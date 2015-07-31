@@ -1,7 +1,7 @@
 <div id='cssmenu'>
    <ul>
       <li>
-         <a href='/admin' id='menu_home'><span>Home</span></a>
+         <a href='/admin'><span>Home</span></a>
       </li>   
 
       <!-- Layout -->   
@@ -48,7 +48,9 @@
       </li>
 
       <!-- Accounts -->
-      <li><a href='#'><span>Events</span></a></li>
+      <li>
+         {!! link_to_route('event/index', 'Event') !!}
+      </li>
 
    </ul>
 

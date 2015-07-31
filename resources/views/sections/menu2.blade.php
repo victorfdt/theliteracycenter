@@ -71,6 +71,9 @@
       <li id="menu_event" class='has-sub'><a href='#'><span>Events</span></a>
          <ul>
             <li>               
+               <a href="{{ url('event/main') }}">Main events</a>
+            </li>
+            <li>               
                <a href="{{ url('/event/calendar') }}">Calendar</a>
             </li>                      
          </ul>

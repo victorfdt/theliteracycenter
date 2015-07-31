@@ -1,4 +1,5 @@
-@extends('layouts.volunteer')
+@extends(Auth::user()->isAdmin() ? 'layouts.admin' : 'layouts.volunteer')
+
 @inject('monthlyReport', 'App\MonthlyReport')
 @inject('auth', 'Auth')
 

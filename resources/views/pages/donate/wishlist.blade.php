@@ -22,7 +22,7 @@
 				</a>
 			</h4>
 		</div>
-		<div id="{{ 'collapse' . $panelId }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{ '#heading' . $panelId }}">
+		<div id="{{ 'collapse' . $panelId }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{ '#heading' . $panelId }}">
 			<div class="panel-body">
 				@if(!empty($item->description))
 				<p>{{ $item->description }}</p>
@@ -33,16 +33,8 @@
 			</div>
 		</div>
 	</div>
+	<br>
 	<?php $panelId++ ?>
 	@endforeach	
 </div>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-	$(".collapse").collapse('hide');
-});
-
-</script>
-
 @stop

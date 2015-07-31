@@ -31,7 +31,7 @@
 				<td>{!! HTML::image($image->path, '', array('style' => 'width: 150px;')) !!}</td>
 				<td>{{$image->name }}</td>
 				<td>					
-					<a href="{{ $image->link }}">{{ $image->link }}</a>
+					<a href="{{ $image->link }}">Link</a>
 				</td>
 				
 				<!-- Type -->

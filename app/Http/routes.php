@@ -102,6 +102,18 @@ get('indexpage/status/{id}', array('as' => 'indexpage/status', 'uses' => 'IndexP
 get('/', array('as' => '/', 'uses' => 'IndexPageController@displayPosts'));
 get('/index', array('as' => '/index', 'uses' => 'IndexPageController@displayPosts'));
 
+/** EVENT */
+get('event/edit/{id}', array('as' => 'event/edit', 'uses' => 'EventsController@edit'));
+post('event/store', array('as' => 'event/store', 'uses' => 'EventsController@store'));
+patch('event/update/{id}', array('as' => 'event/update', 'uses' => 'EventsController@update'));
+get('event/destroy/{id}', array('as' => 'event/destroy', 'uses' => 'EventsController@destroy'));
+get('event/index', array('as' => 'event/index', 'uses' => 'EventsController@index'));
+get('event/edit', array('as' => 'event/edit', 'uses' => 'EventsController@edit'));
+get('event/create', array('as' => 'event/create', 'uses' => 'EventsController@create'));
+get('event/show/{id}', array('as' => 'event/show', 'uses' => 'EventsController@show'));
+get('event/main', array('as' => 'event/main', 'uses' => 'EventsController@displayEvents'));
+
+
 /** ################ VOLUNTEER SECTION ################ */
 
 /** VOLUNTEER */

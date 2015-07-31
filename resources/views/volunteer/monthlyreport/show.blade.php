@@ -1,5 +1,4 @@
-@extends('layouts.volunteer')
-
+@extends(Auth::user()->isAdmin() ? 'layouts.admin' : 'layouts.volunteer')
 @section('content')
 
 <h3>Monthly Report - View</h3>	
