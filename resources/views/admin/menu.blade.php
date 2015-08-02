@@ -43,8 +43,7 @@
       </li>
       
       <!-- Files -->
-      <li class='has-sub'><a href='#'><span>Files</span></a>   
-         <li class='last'><a href='#'><span>Newletters</span></a></li>         
+      <li><a href='{{ url('file/index') }}'><span>Files</span></a>   
       </li>
 
       <!-- Accounts -->

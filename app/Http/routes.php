@@ -113,6 +113,18 @@ get('event/create', array('as' => 'event/create', 'uses' => 'EventsController@cr
 get('event/show/{id}', array('as' => 'event/show', 'uses' => 'EventsController@show'));
 get('event/main', array('as' => 'event/main', 'uses' => 'EventsController@displayEvents'));
 
+/** FILE */
+get('file/edit/{id}', array('as' => 'file/edit', 'uses' => 'FilesController@edit'));
+post('file/store', array('as' => 'file/store', 'uses' => 'FilesController@store'));
+patch('file/update/{id}', array('as' => 'file/update', 'uses' => 'FilesController@update'));
+get('file/destroy/{id}', array('as' => 'file/destroy', 'uses' => 'FilesController@destroy'));
+get('file/index', array('as' => 'file/index', 'uses' => 'FilesController@index'));
+get('file/edit', array('as' => 'file/edit', 'uses' => 'FilesController@edit'));
+get('file/create', array('as' => 'file/create', 'uses' => 'FilesController@create'));
+get('file/show/{id}', array('as' => 'file/show', 'uses' => 'FilesController@show'));
+get('volunteer/file', array('as' => 'volunteer/file', 'uses' => 'FilesController@displayVolunteer'));
+get('newsletter', array('as' => 'newsletter', 'uses' => 'FilesController@displayNewsletter'));
+
 
 /** ################ VOLUNTEER SECTION ################ */
 

@@ -14,12 +14,8 @@
       </li>
 
       <!-- Files -->
-      <li class='has-sub'><a href='#'><span>Files</span></a>
-         <ul>
-            <li><a href='#'><span>Documents</span></a></li>
-            <li><a href='#'><span>Reports</span></a></li>
-            <li><a href='#'><span>Form</span></a></li>
-         </ul>
+      <li>
+         <a href="{{ url('volunteer/file') }}"><span>Files</span></a>         
       </li>  
    </ul>
 
