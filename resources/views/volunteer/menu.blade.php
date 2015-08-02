@@ -25,7 +25,7 @@
          <a href="#"> <span>{{ Auth::user()->name }}</span></a>
          <ul>
             <li><a href="{{ url('/auth/logout') }}">Logout</a></li>
-            <li><a href="{{ url('editpassword') }}">Change password</a></li>
+            <li><a href="{{ url('volunteer/password/edit') }}">Change password</a></li>
          </ul>
       </li>      
    </ul>

@@ -145,10 +145,24 @@ class UsersController extends Controller
     }
 
     /** Changes user passord */
-     public function passwordReset(ChangePasswordRequest $request, $id){
+    public function passwordReset(ChangePasswordRequest $request, $id){
 
         $this->user->find($id);
         $user->password = bcrypt($newUser->name . 'litcenter');
+        $user->save();
+
+        //Sending the user to the accounts page
+        return redirect()->route('users.index');
+    }
+
+    /*
+        If the user forget his password, the admin can reset it
+    */
+    public function resetPassword($id){
+        //Find the user
+        $user = User::find($id);
+
+        $user->password = bcrypt($user->name . 'litcenter');
         $user->save();
 
         //Sending the user to the accounts page

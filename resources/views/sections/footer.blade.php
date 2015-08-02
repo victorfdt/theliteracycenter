@@ -57,5 +57,7 @@
 
 	<!-- Copyright -->
 	<div id="copyright" class="container">
-		Design: <a href="http://templated.co">Templated</a> Developer: <a href="https://www.linkedin.com/pub/victor-forato-di-trani/40/b42/450?trk=pub-pbmap">Victor Forato</a>
+		Design: <a href="http://templated.co">Templated</a> 
+		Developer: <a href="https://www.linkedin.com/pub/victor-forato-di-trani/40/b42/450?trk=pub-pbmap">Victor Forato</a>
+		Login: <a href="/login">Link</a>
 	</div>

@@ -4,7 +4,7 @@
 			<div class="panel-heading">
 				<div class="panel-title">Sign In</div>
 				<div style="float:right; font-size: 80%; position: relative; top:-10px">
-					<a href="{{ url('/password') }}">Forgot password?</a>					
+					<!-- <a href="{{ url('/password') }}">Forgot password?</a>		-->			
 				</div>
 			</div>     
 

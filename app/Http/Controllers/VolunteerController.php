@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ChangePasswordRequest;
 
 use App\User;
 use Auth;
@@ -96,5 +97,19 @@ class VolunteerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function passwordEdit(){
+        return view('volunteer.edit_password', compact('user'));        
+    }
+
+    public function passwordUpdate(ChangePasswordRequest $request){
+
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        //Sending the user to the accounts page
+        return redirect()->route('volunteer');
     }
 }

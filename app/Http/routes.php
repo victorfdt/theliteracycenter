@@ -35,6 +35,7 @@ get('users/edit/{id}', array('as' => 'users/edit', 'uses' => 'UsersController@ed
 post('users/store', array('as' => 'users/store', 'uses' => 'UsersController@store'));
 patch('users/update/{id}', array('as' => 'users/update', 'uses' => 'UsersController@update'));
 get('users/destroy/{id}', array('as' => 'users/destroy', 'uses' => 'UsersController@destroy'));
+get('users/reset/{id}', array('as' => 'users/reset', 'uses' => 'UsersController@resetPassword'));
 $router->resource('users', 'UsersController');
 
 
@@ -130,6 +131,8 @@ get('newsletter', array('as' => 'newsletter', 'uses' => 'FilesController@display
 
 /** VOLUNTEER */
 get('volunteer', array('as' => 'volunteer', 'uses' => 'VolunteerController@index'));
+get('volunteer/password/edit', array('as' => 'volunteer/password/edit', 'uses' => 'VolunteerController@passwordEdit'));
+patch('volunteer/password/update', array('as' => 'volunteer/password/update', 'uses' => 'VolunteerController@passwordUpdate'));
 
 /** MONTHLY REPORT */
 get('monthlyreport/edit/{id}', array('as' => 'monthlyreport/edit', 'uses' => 'MonthlyReportController@edit'));

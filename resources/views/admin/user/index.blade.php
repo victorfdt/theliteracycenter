@@ -52,6 +52,7 @@
 <!-- Buttons -->
 <div class="container text-right actionsButton">
 	
+	<button type="button" class="btn btn-success" id="resetButton">Reset password</button>
 	<button type="button" class="btn btn-success" id="deleteButton">Delete</button>	
 	<button type="button" class="btn btn-success" id="updateButton">Update</button>	
 	{!! link_to_route('users.create','Create', [] ,array('class' => 'btn btn-success')) !!}
@@ -67,6 +68,7 @@
 	 */
 	var deletePath = "{{ url('users/destroy') }}";
 	var editPath = "{{ url('users/edit') }}";	
+	var resetPath = "{{ url('users/reset') }}";
 	var element = "user";
 </script>
 

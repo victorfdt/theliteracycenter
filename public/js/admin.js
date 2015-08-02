@@ -59,6 +59,25 @@ $(document).ready(function(){
 	});
 
 	/** 
+	Reset password buton
+	*/
+	$("#resetButton").click(function(){
+
+		if(isItemSelected()){
+			//Changing the information on modal
+			$("#modalHeader").text("Reset " + element + " password");
+			$("#modalContent").text("Reset "+ element +" password operation.");
+
+			//Setting the delete button with the selected user id		
+			var confirmButtonLink = resetPath + '/' + $('table input[type=radio]:checked').val();
+			$("#confirmButton").attr('href', confirmButtonLink);
+
+			//Show the modal div
+			$("#myModal").modal();
+		}
+	});
+
+	/** 
 	Banner change status button
 	Check if status was pressioned, and modifies the modal.
 	*/
