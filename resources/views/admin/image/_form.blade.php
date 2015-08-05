@@ -24,11 +24,8 @@
          The input Input::old load the selected value on the update page
        -->
        
-       {!! Form::select('type', array($image::MAIN_BANNER => 'Main page banner', 
-       $image::GENERAL_BANNER => 'General banner',
-       $image::SIDE_BAR => 'Side bar',
-       $image::LOGO => 'Logo',
-       $image::FOOTER => 'Footer'), 
+       {!! Form::select('type', array($image::MAIN_BANNER => 'Main page banner',       
+                                      $image::SIDE_BAR => 'Side bar'), 
        Input::old('type', $image->type), ['class' => 'form-control', 'name' => 'type', 'id' => 'type']); !!}       
        
 
