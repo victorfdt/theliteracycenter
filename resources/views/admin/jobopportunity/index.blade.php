@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-	<h3>Members</h3>	
+	<h3>Job Opportunity</h3>	
 
 	<!-- Error message -->
 	@if(Session::has('message'))

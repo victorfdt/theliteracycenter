@@ -30,9 +30,7 @@
          <ul>
             <li>
                {!! link_to_route('monthlyreport/index', 'Monthly report') !!}
-            </li>
-            <li><a href='#'><span>Reports</span></a></li>
-            <li><a href='#'><span>Form</span></a></li>
+            </li> 
 
          </ul>
       </li>      

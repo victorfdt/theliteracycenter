@@ -102,7 +102,7 @@
 						<td>{{ $session->day }}</td>
 						<td>{{ $session->hours }}</td>
 						<td>
-							@if($report->student_present)
+							@if($session->student_present)
 								{{ 'Yes' }}
 							@else
 								{{ 'No' }}

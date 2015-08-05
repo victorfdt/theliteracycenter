@@ -9,9 +9,9 @@
   </div>
 </div>
 
-<!-- SURNAME -->
+<!-- LAST NAME -->
 <div class="form-group {{ $errors->has('surname') ? 'has-error' : ''}} ">
-  <label for="surname" class="col-sm-2 control-label">Surname</label>
+  <label for="surname" class="col-sm-2 control-label">Last name</label>
   <div class="col-sm-5">   
     {!! Form::text('surname', null, ['class' => 'form-control']) !!}
     {!! $errors->first('surname', '<span class="help-block">:message</span>') !!}
@@ -55,10 +55,10 @@
          The input Input::old load the selected value on the update page
      -->
     @if (isset($user))
-      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer', $role::USER => 'User'), Input::old('role', $user->role->privilege), ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
+      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer'), Input::old('role', $user->role->privilege), ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
     
     @else
-      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer', $role::USER => 'User'), '', ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
+      {!! Form::select('role', array($role::ADMIN => 'Administrator', $role::VOLUNTEER => 'Volunteer'), '', ['class' => 'form-control', 'name' => 'role', 'id' => 'role']); !!}
     
     @endif
     {!! $errors->first('role', '<span class="help-block">:message</span>') !!}   

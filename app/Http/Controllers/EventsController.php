@@ -25,7 +25,7 @@ class EventsController extends Controller
     public function __construct()
     {        
         //Check if this user is a admin
-        $this->middleware('admin');
+        $this->middleware('admin', ['except' => ['displayEvents']]);
 
         $this->event = new Event();
 
@@ -40,7 +40,7 @@ class EventsController extends Controller
     public function index()
     {
         //Find the events
-        $events = Event::get();
+        $events = Event::orderBy('date', 'asc')->get();
 
         return view('admin.event.index', compact('events'));
     }
@@ -53,7 +53,8 @@ class EventsController extends Controller
     public function displayEvents()
     {
         //Find the events
-        $events = Event::orderBy('date', 'asc')->get();
+        $events = Event::where('date','>=', Carbon::now())
+                        ->orderBy('date', 'asc')->get();
 
         return view('pages.event.main_events', compact('events'));
     }

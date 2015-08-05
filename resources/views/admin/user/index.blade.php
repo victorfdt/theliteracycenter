@@ -9,7 +9,7 @@
 			<tr>
 				<th></th>
 				<th>Name</th>
-				<th>Surname</th>
+				<th>Last name</th>
 				<th>E-mail</th>
 				<th>Role</th>
 				<th>Gender</th>

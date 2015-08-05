@@ -44,7 +44,7 @@ class WishListController extends Controller
      */
     public function displayWishList()
     {
-        $wishlist = WishList::get();
+        $wishlist = WishList::where('active', true)->get();
         return view('pages.donate.wishlist', compact('wishlist'));
     }
 

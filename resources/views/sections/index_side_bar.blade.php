@@ -30,7 +30,7 @@
 		<li>
 			<div class="media">
 				<div class="media-left">
-					<a href="{{ url('/donate/contribution') }}">
+					<a href="{{ url('/donate/wishlist') }}">
 						<img src="images/upload/image/default/pig_donate.jpg" class="img-rounded" alt="">
 					</a>
 				</div>

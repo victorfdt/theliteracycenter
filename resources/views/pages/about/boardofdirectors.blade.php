@@ -7,10 +7,6 @@
 
 <br><br>
 
-<p><strong>Board of Directors 2015-2016</strong></p>
-
-<br>
-
 @foreach($members as $member)
 	@include('pages.about._displayMembers')
 @endforeach

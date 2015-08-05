@@ -68,7 +68,7 @@
       </li>
       <li><a href='http://www.litcenter.org/'><span>Blog</span></a></li>
 
-      <li><a href="{{ url('newsletter') }}"><span>Newsletter</span></a>   
+      <li id="menu_newsletter" ><a href="{{ url('newsletter') }}"><span>Newsletter</span></a>   
 
       <li id="menu_event" class='has-sub'><a href='#'><span>Events</span></a>
          <ul>
@@ -97,9 +97,9 @@
             </li> 
             <li>               
                <a href="{{ url('/volunteer/volunteerworkshop') }}">Workshop</a>
-            </li>
+            </li>            
             <li>               
-               <a href="{{ url('/volunteer/tutorreport') }}">Monthly tutor report</a>
+               <a href="{{ url('/login') }}">Login</a>
             </li>
          </ul>
       </li>
