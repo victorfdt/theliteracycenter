@@ -27,13 +27,7 @@
 		<tbody>
 			@foreach($images as $image)
 			<tr>
-				<!-- ID -->
-				@if($image->type == $image::MAIN_BANNER || $image->type == $image::SIDE_BAR)
-					<td>{!! Form::radio('imageId', $image->id) !!}</td>
-				@else
-					<td><input type="radio" disabled="disabled" /></td>
-				@endif
-							
+				<td>{!! Form::radio('imageId', $image->id) !!}</td>				
 				<td>{!! HTML::image($image->path, '', array('style' => 'width: 150px;')) !!}</td>
 				<td>{{$image->name }}</td>
 				<td>					
